@@ -1,23 +1,27 @@
+;------------------------------------------------
+;File:.emacs
+;Description:this is my emacs configuration file
+;Author:monkey
+;Upate date:2012-11-25
+;Blog:www.itlodge.net
+;------------------------------------------------
+
+;=================== start =========================;
+
+(defvar cfg_dir "~/.emacs.d/")
+
+(load-file "~/.emacs.d/coding.el")
+
+(load-file "~/.emacs.d/display.el")
+
+(load-file "~/.emacs.d/key.el")
+
+(load-file "~/.emacs.d/life.el")
+
+
+;=================== end ==========================;
+
 (custom-set-variables
- '(inhibit-startup-screen t))
-
-;tabbar-ruler
-(add-to-list 'load-path "~/.emacs.d/plugins")
-(setq tabbar-ruller-global-tabbar 't)
-(setq tabbar-ruler-global-ruler 't)
-(require 'tabbar-ruler)
-
-(fset 'yes-or-no-p 'y-or-n-p)
-(global-linum-mode t)
-(setq x-select-enable-clipboard t)
-(setq-default cursor-type 'bar)
-(tool-bar-mode -1)
-
-(global-set-key "\C-L" 'forward-char)
-(global-set-key "\C-H" 'backward-char)
-
-;theme
-(load-theme 'wombat t)
-
-
+ '(ecb-options-version "2.40"))
+(custom-set-faces)
 
