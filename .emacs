@@ -8,15 +8,16 @@
 
 ;=================== start =========================;
 
-(defvar cfg_dir "~/.emacs.d/")
+(setq cfg-dir "~/.emacs.d/")
+(setq plugins-path "~/.emacs.d/plugins/")
 
-(load-file "~/.emacs.d/coding.el")
+(load-file (concat cfg-dir "coding.el"))
 
-(load-file "~/.emacs.d/display.el")
+(load-file (concat cfg-dir "display.el"))
 
-(load-file "~/.emacs.d/key.el")
+(load-file (concat cfg-dir "key.el"))
 
-(load-file "~/.emacs.d/life.el")
+(load-file (concat cfg-dir "life.el"))
 
 
 ;=================== end ==========================;
