@@ -3,9 +3,11 @@
 ;======================================================
 ;code style
 ;======================================================
-;tab distance
-(setq tab-width 4
-      c-basic-offset 4)
+(load-file (concat plugins-path "guess-offset.el"))
+(require 'guess-offset)
+(add-hook 'c-mode-common-hook '(lambda()(c-toggle-auto-state 1)))
+(load-file (concat plugins-path "smart-tab.el"))
+
 ;c/c++ style
 (setq c-default-style
       '((c-mode . "k&r")
@@ -43,10 +45,10 @@
 ;======================================================================
 
 (load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el");
-;(global-ede-mode 1)
+(global-ede-mode 1)
 
 ;semantic
-;(semantic-load-enable-code-helpers)
+(semantic-load-enable-code-helpers)
 ;(semantic-load-enable-gaudy-code-helpers)
 ;(semantic-load-enable-semantic-debugging-helpers)
 ;(global-srecode-minor-mode 1)
@@ -66,7 +68,7 @@
 ;(add-hook 'c-mode-common-hook 'my-cedet-hook)
 
 ;code jump
-;(global-set-key (kbd "C-'") 'semantic-ia-fast-jump)
+(global-set-key (kbd "C-]") 'semantic-ia-fast-jump)
 
 ;code complete
 ;(global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)

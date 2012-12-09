@@ -3,7 +3,7 @@
       [(0 8)
        nil "Interface to ack, a source code search tool" tar])
  (adaptive-wrap .
-		[(0 1)
+		[(0 2)
 		 nil "Smart line-wrapping with wrap-prefix" single])
  (all .
       [(1 0)
@@ -99,7 +99,7 @@
 	 [(0 8)
 	  nil "OAuth 2.0 Authorization Protocol" single])
  (org .
-      [(20121126)
+      [(20121203)
        nil "Outline-based notes management and organizer" tar])
  (quarter-plane .
 		[(0 1)
@@ -123,7 +123,7 @@
 		 [(4 0)
 		  nil "Insert operators with surrounding spaces smartly" single])
  (sml-mode .
-	   [(6 1)
+	   [(6 2)
 	    nil "Major mode for editing (Standard) ML" single])
  (svg-clock .
 	    [(0 4)
@@ -141,7 +141,7 @@
 	  (0 3)))
 	"Trie data structure" single])
  (undo-tree .
-	    [(0 5 5)
+	    [(0 6 3)
 	     nil "Treat undo history as a tree" single])
  (uni-confusables .
 		  [(0 1)

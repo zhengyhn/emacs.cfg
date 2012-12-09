@@ -6,6 +6,6 @@
 
 (global-set-key (kbd "C-SPC") nil)          ;disable for fcitx input method
 
-(global-set-key (kbd "RET") 'newline-and-indent)   ;for indent
+;(global-set-key (kbd "RET") 'newline-and-indent)   ;for indent
 
-(global-set-key (kbd "s-s") 'shell)       ;start shell
+(global-set-key (kbd "C-c s") 'shell)       ;start shell

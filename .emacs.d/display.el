@@ -22,9 +22,10 @@
 
 ;tabbar-ruler
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
-(setq tabbar-ruler-global-tabbar 't)
-(setq tabbar-ruler-global-ruler 't)
-(require 'tabbar-ruler)
+(require 'tabbar)
+;(setq tabbar-ruler-global-tabbar 't)
+;(setq tabbar-ruler-global-ruler 't)
+;(require 'tabbar-ruler)
 (tabbar-mode t)
 (global-set-key [C-tab] 'tabbar-forward)             ;switch tabbar
 (global-set-key [C-S-iso-lefttab] 'tabbar-backward)
