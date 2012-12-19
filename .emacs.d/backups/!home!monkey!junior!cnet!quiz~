@@ -1,0 +1,39 @@
+=========>
+Why is there a UDP? List the 4 advantages.
+1.no connection establishment
+2.simple
+3.small segment header
+4.no congestion control
+
+========>
+12 kids sending letters to 12 kids 
+kids ==> processes
+letters in envelopes ==> app messages
+Ann and Bill who demux to in-house siblings ==> transport layer protocol
+houses ==> hosts
+postal service ==> network layer protocol
+
+========>
+How does UDP checksum works?
+Please tell the procedures on sender and receiver.
+发送方：把32位分成两部分，相加（进位则wrap around)，再取反码，加到checksum字段
+接收方：把3个16位的部分相加
+如果没有错误发生，则结果会是全1
+
+==========>
+Internet transport-layer protocols does NOT provide these services:
+a. unreliable, unordered delivery 
+b.bandwidth guarantees
+c. delay guarantees 
+d. reliable, in-order delivery
+
+b,c
+
+=========>
+What's the different between Go-back-N and Selective Repeat protocols.
+PPT3-46
+for GBN: receiver only sends cumulative acks,
+sender has timer for oldest unacked packet
+
+for selective repeat,receiver sends individual ack for each packet,
+sender maintains timer for each unacked packet

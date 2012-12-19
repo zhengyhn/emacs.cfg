@@ -32,7 +32,7 @@
 ;;Set default download directory
 ;(let ((d "~/downloads/"))
 ;(setq w3m-default-save-directory
-;	  (or (and (file-directory-p d) d) w3m-default-directory)))
+	  (or (and (file-directory-p d) d) w3m-default-directory)))
 ;;W3M doesn't name buffers very intelligently. Let's fix that:
 ;(add-hook 'w3m-display-hook
 ;		  (lambda (url)

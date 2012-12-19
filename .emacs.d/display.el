@@ -17,8 +17,19 @@
 
 (display-time)                     ;display clock
 
-(load-theme 'dichromacy t)         ;select the theme
-
+;(load-theme 'dichromacy t)         ;select the theme
+;(load-theme 'adwaita t)
+;(load-theme 'deeper-blue)
+;(load-theme 'light-blue)
+;(load-theme 'manoj-dark)
+;(load-theme 'misterioso)
+;(load-theme 'tango-dark)
+;(load-theme 'tango)
+;(load-theme 'tsdh-dark)
+;(load-theme 'tsdh-light)
+;(load-theme 'wheatgrass)
+;(load-theme 'whiteboard)
+(load-theme 'wombat)
 
 ;tabbar-ruler
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
@@ -35,4 +46,5 @@
 (load-file "~/.emacs.d/plugins/unicad.el")
 (require 'unicad)
 
-(setq make-backup-files nil)     ;don't generate *~
+;all *~ files in one place
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))     

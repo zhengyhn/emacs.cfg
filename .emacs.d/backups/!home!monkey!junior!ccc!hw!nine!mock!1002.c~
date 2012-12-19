@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <math.h>
+
+#define N 1025
+
+struct Point{
+	float x,y,z;
+};
+
+float getDist(struct Point p1,struct Point p2);
+
+int main()
+{
+	int t,n,i,j;
+	float dist;
+	struct Point p,s[N];
+
+	while(scanf("%d",&t) != EOF){
+		scanf("%f %f %f",&p.x,&p.y,&p.z);
+		scanf("%d",&n);
+		scanf("%f %f %f",&s[0].x,&s[0].y,&s[0].z);
+		dist = getDist(s[0],p);
+		j = 0;
+		for(i = 1; i < n; i++){
+			scanf("%f %f %f",&s[i].x,&s[i].y,&s[i].z);
+			if(getDist(s,p) < dist){
+				dist = getDist(s,p);
+				j = i;
+			}
+		}
+		printf("(%.2f, %.2f, %.2f) %.2f\n",s[j].x,s[j].y,s[j].z,dist);
+	}
+
+	return 0;
+}	
+			

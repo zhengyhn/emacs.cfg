@@ -21,7 +21,6 @@
 ;pascal style
 (load-file (concat plugins-path "pascal.el"))
 (require 'pascal)
-(autoload 'pascal-mode "pascal" "Pascal Mode." t)
 
 ;======================================================
 
