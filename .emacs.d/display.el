@@ -10,6 +10,7 @@
 (setq x-select-enable-clipboard t) ;share clipboard
 
 (setq-default cursor-type 'bar)    ;cursor type as |
+(global-hl-line-mode t)            ;highlight the current line
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)                 ;disable toolbar,menubar and scrollbar
@@ -19,7 +20,7 @@
 
 ;(load-theme 'dichromacy t)         ;select the theme
 ;(load-theme 'adwaita t)
-;(load-theme 'deeper-blue)
+(load-theme 'deeper-blue)
 ;(load-theme 'light-blue)
 ;(load-theme 'manoj-dark)
 ;(load-theme 'misterioso)
@@ -29,7 +30,7 @@
 ;(load-theme 'tsdh-light)
 ;(load-theme 'wheatgrass)
 ;(load-theme 'whiteboard)
-(load-theme 'wombat)
+;(load-theme 'wombat)
 
 ;tabbar-ruler
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
@@ -48,3 +49,8 @@
 
 ;all *~ files in one place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))     
+
+;;font
+(set-default-font "Courier New-12") 
+
+(set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")) 

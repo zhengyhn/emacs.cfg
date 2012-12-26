@@ -1,5 +1,9 @@
 ;the cfg for coding
 
+;;comment
+(global-set-key (kbd "M-;") 'comment-region)
+(global-set-key (kbd "M-'") 'uncomment-region)
+
 ;======================================================
 ;code style
 ;======================================================
@@ -48,16 +52,42 @@
 
 ;======================================================================
 
+;;==============================================================
+;;cscope
+;;===============================================================
+(load-file (concat plugins-path "xcscope.el"))
+(require 'xcscope)
+(global-set-key (kbd "C-'") 'cscope-find-global-definition-no-prompting)
+(global-set-key (kbd "C-;") 'cscope-pop-mark)
+(setq cscope-display-cscope-buffer nil)
+
+;;==============================================================
+
+
+;;=================================================================
+;;gtags
+;;=================================================================
+;(load-file "/usr/local/share/gtags/gtags.el")
+;(autoload 'gtags-mode "gtags" "" t)
+;(setq c-mode-hook
+;	  '(lambda()
+;		 (gtags-mode 1)))
+;(global-set-key (kbd "C-'") 'gtags-find-tag-from-here)
+;(global-set-key (kbd "C-;") 'gtags-pop-stack)
+
+;;====================================================================
+
+
 
 ;======================================================================
 ;cedet
 ;======================================================================
 
-(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el");
-(global-ede-mode 1)
+;(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el");
+;(global-ede-mode 1)
 
 ;semantic
-(semantic-load-enable-code-helpers)
+;(semantic-load-enable-code-helpers)
 ;(semantic-load-enable-gaudy-code-helpers)
 ;(semantic-load-enable-semantic-debugging-helpers)
 ;(global-srecode-minor-mode 1)
@@ -77,7 +107,7 @@
 ;(add-hook 'c-mode-common-hook 'my-cedet-hook)
 
 ;code jump
-(global-set-key (kbd "C-]") 'semantic-ia-fast-jump)
+;(global-set-key (kbd "C-]") 'semantic-ia-fast-jump)
 
 ;code complete
 ;(global-set-key (kbd "M-n") 'semantic-ia-complete-symbol-menu)
@@ -89,24 +119,24 @@
 ;ecb
 ;=======================================================================
 
-(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40")
-(require 'ecb)
+;(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40")
+;(require 'ecb)
 ;(require 'ecb-autoloads)
-(custom-set-variables
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
-(custom-set-faces)
-(setq stack-trace-on-error nil)
-(setq ecb-auto-activate nil
-      ecb-tip-of-the-day nil)
-;C-; to start ecb
-(defun ecb-open-close()
-  (interactive)
-  (if ecb-minor-mode
-      (ecb-deactivate)
-      (ecb-activate)
-   )
-)
-(global-set-key (kbd "C-;") 'ecb-open-close)
+;(custom-set-variables
+; '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2)))
+;(custom-set-faces)
+;(setq stack-trace-on-error nil)
+;(setq ecb-auto-activate nil
+;      ecb-tip-of-the-day nil)
+;;C-; to start ecb
+;(defun ecb-open-close()
+;  (interactive)
+;;   (if ecb-minor-mode
+;;       (ecb-deactivate)
+;;       (ecb-activate)
+;;    )
+;; )
+;; (global-set-key (kbd "C-;") 'ecb-open-close)
 
 ;==================================================================
 
