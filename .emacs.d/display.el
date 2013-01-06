@@ -51,6 +51,5 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))     
 
 ;;font
-(set-default-font "Courier New-12") 
-
-(set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")) 
+;;(set-default-font "-monotype-Courier New-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1") 
+(set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
