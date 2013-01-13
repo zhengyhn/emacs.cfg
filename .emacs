@@ -2,7 +2,7 @@
 ;File:.emacs
 ;Description:this is my emacs configuration file
 ;Author:monkey
-;Upate date:2012-11-25
+;Upate date:2013-1-13
 ;Blog:www.itlodge.net
 ;------------------------------------------------
 
@@ -10,6 +10,7 @@
 
 (setq cfg-dir "~/.emacs.d/")
 (setq plugins-path "~/.emacs.d/plugins/")
+(eval-when-compile (require 'cl))
 
 (load-file (concat cfg-dir "coding.el"))
 
@@ -22,7 +23,4 @@
 
 ;=================== end ==========================;
 
-(custom-set-variables
- '(ecb-options-version "2.40"))
-(custom-set-faces)
 

@@ -1,10 +1,13 @@
 ;the cfg for coding
 
+;;==========
 ;;comment
+;;===============================================
 (global-set-key (kbd "M-;") 'comment-region)
 (global-set-key (kbd "M-'") 'uncomment-region)
+;;===============================================
 
-;======================================================
+;============
 ;code style
 ;======================================================
 (load-file (concat plugins-path "guess-offset.el"))
@@ -18,41 +21,34 @@
 		(c++-mode . "ellemtel")
 		(java-mode . "java")
 		(python-mode . "python")
-		(other . "linux")
-       )
-)
+		(other . "linux")))
 
 ;pascal style
-(load-file (concat plugins-path "pascal.el"))
-(require 'pascal)
-(autoload 'pascal-mode "pascal" "Pascal Mode." t)
+;(load-file (concat plugins-path "pascal.el"))
+;(require 'pascal)
+;(autoload 'pascal-mode "pascal" "Pascal Mode." t)
 
 ;======================================================
 
 
-;======================================================
+;==============
 ;smart complie
 ;======================================================
-
 (load-file "~/.emacs.d/plugins/smart-compile.el")
 (global-set-key [f9] 'smart-compile)
 (global-set-key [f10] 'gdb)
-
 ;======================================================
 
-
-;===================================================================
+;==============
 ;auto-complete
 ;===================================================================
-
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete//ac-dict")
 (ac-config-default)
-
 ;======================================================================
 
-;;==============================================================
+;;=======
 ;;cscope
 ;;===============================================================
 (load-file (concat plugins-path "xcscope.el"))
@@ -60,8 +56,14 @@
 (global-set-key (kbd "C-'") 'cscope-find-global-definition-no-prompting)
 (global-set-key (kbd "C-;") 'cscope-pop-mark)
 (setq cscope-display-cscope-buffer nil)
-
 ;;==============================================================
+
+;;=========
+;;srSpeedbar
+;;=================================================
+(load-file (concat plugins-path "sr-speedbar.el"))
+(require 'sr-speedbar)
+(global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
 
 
 ;;=================================================================
@@ -76,8 +78,6 @@
 ;(global-set-key (kbd "C-;") 'gtags-pop-stack)
 
 ;;====================================================================
-
-
 
 ;======================================================================
 ;cedet

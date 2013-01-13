@@ -4,8 +4,8 @@
 ;;
 ;;code:
 
-(eval-when-compile
-  (require 'cl))
+(eval-when-compile      ;;when is constant
+  (require 'cl))        ;;load common lisp functions
 (require 'url-http)
 (require 'json)
 

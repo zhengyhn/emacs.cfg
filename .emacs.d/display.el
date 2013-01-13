@@ -18,9 +18,12 @@
 
 (display-time)                     ;display clock
 
-;(load-theme 'dichromacy t)         ;select the theme
+;;======
+;;theme
+;;=====================================================
+(load-theme 'dichromacy t)         ;select the theme
 ;(load-theme 'adwaita t)
-(load-theme 'deeper-blue)
+;(load-theme 'deeper-blue)
 ;(load-theme 'light-blue)
 ;(load-theme 'manoj-dark)
 ;(load-theme 'misterioso)
@@ -31,8 +34,11 @@
 ;(load-theme 'wheatgrass)
 ;(load-theme 'whiteboard)
 ;(load-theme 'wombat)
+;;=====================================================
 
-;tabbar-ruler
+;;=============
+;;tabbar-ruler
+;;=====================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
 (require 'tabbar)
 ;(setq tabbar-ruler-global-tabbar 't)
@@ -41,7 +47,7 @@
 (tabbar-mode t)
 (global-set-key [C-tab] 'tabbar-forward)             ;switch tabbar
 (global-set-key [C-S-iso-lefttab] 'tabbar-backward)
-
+;;=====================================================================
 
 ;encoding
 (load-file "~/.emacs.d/plugins/unicad.el")
@@ -53,3 +59,17 @@
 ;;font
 ;;(set-default-font "-monotype-Courier New-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1") 
 (set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
+
+;;============
+;;transparent
+;;=====================================================================
+(defun toggle-transparent()
+  "transparent frame or not"
+  (interactive)
+  (if (or
+	   (equal (frame-parameter (selected-frame) 'alpha) nil)
+	   (equal (frame-parameter (selected-frame) 'alpha) '(100 100)))
+	  (set-frame-parameter (selected-frame) 'alpha '(70 50))
+	(set-frame-parameter (selected-frame) 'alpha '(100 100))))
+(global-set-key [(f11)] 'toggle-transparent)
+;;=====================================================================

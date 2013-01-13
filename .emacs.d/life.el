@@ -12,18 +12,17 @@
 (global-set-key (kbd "C-c d") 'sdcv-search)
 ;=======================================================
 
-;=========================erc===========================
-;(add-to-list 'load-path (concat plugins-path "erc-5.1.2"))
-;(require 'erc)
-
-;=======================================================
-
 ;;================douban music=============================
 (load-file (concat plugins-path "douban-music.el"))
 (require 'douban-music)
 (global-set-key (kbd "M-n") 'douban-music-play-next-song)
 
 ;;=========================================================
+
+;===============================org-mode======================================
+;(setq org-export-odt-preferred-output-format "doc")
+;=============================================================================
+
 
 ;;================jabber===================================
 ;(add-to-list 'load-path (concat plugins-path "emacs-jabber"))
@@ -77,14 +76,6 @@
 ;		  (lambda (url)
 ;			(rename-buffer 
 ;			 (format "*w3m: %s*" (or w3m-current-title w3m-current-url)) t)))
-
-;=============================================================================
-
-;===============================org-mode======================================
-
-;(setq org-export-odt-preferred-output-format "doc")
-
-
 
 ;=============================================================================
 
