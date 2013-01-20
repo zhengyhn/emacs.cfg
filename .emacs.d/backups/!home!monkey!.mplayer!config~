@@ -1,0 +1,6 @@
+# Write your default config options here!
+sub-fuzziness=1
+sub-autoscale=2
+subfont-text-scale=2.5
+subcp=cp936
+

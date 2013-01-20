@@ -1,0 +1,117 @@
+<!--
+    +---------------------------------------------------------------
+    |Date:2012-01-15
+    +---------------------------------------------------------------
+    |Copyright (c) 2012 http://www.itlodge.net All rights reserved.
+    +---------------------------------------------------------------
+    |Author:Monkey
+    +---------------------------------------------------------------
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Copyright" content="Copyright (c) 2012 www.itlodge.net" />
+    <meta name="Author" content="Monkey" />
+    <meta name="Keywords" content="{$keywords}" />
+    <meta name="Description" content="{$dsrp}" />
+    <link href="__PUBLIC__/img/favicon.png" rel="icon" type="image/x-icon" media="all" alt="favicon" />
+    <link href="__PUBLIC__/css/common.css" type="text/css" rel="stylesheet" media="all" />
+    <link href="__PUBLIC__/css/home.css" type="text/css" rel="stylesheet" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/js/common.js" ></script>
+    <title>{$title}</title>
+  </head>
+  <body>
+    <div id="topWrap" >
+	  <div id="topLeft" >
+		<pre>
+_____ _______      _______  _____   _____  _______
+  |      |         |______ |     | |     |    |   
+__|__    |         |       |_____| |_____|    |   
+		</pre>
+	  </div>
+	  <div id="topRight" >
+		<div id="topUp" >
+		  <div id="clock" ></div>
+		  <span>
+			<a href="javascript:setHomePage()">设为首页  </a></span>
+		  <span>
+			<a href="javascript:addFavorite()">加入收藏  </a></span>
+		  <span>今日访问量{$today} </span><span>总访问量{$total}</span>
+		  <if condition="isset($_SESSION['itlodge'])">
+			<span><a href='__ROOT__/21232f297a57a5a743894a0e4a801fc3.php/Index/logout' >注销</a></span>
+		  </if>
+		</div>
+		<div id="topDown" >
+		  <div id="naviWrap" >
+			<div id="navi">
+			  <ul>
+				<li><a href="__URL__/../" >首页</a></li>
+				<li><a href="{:U('News/index')}" >IT资讯</a>
+				  <div>
+					<foreach name="ncList" item="ncVO" >
+					  <a href="__APP__/infos/{$ncVO.id}.html" >{$ncVO.name}</a>
+					</foreach>
+				  </div>
+				</li>
+				<li><a href="{:U('Blog/index')}" >原创博客</a>
+				  <div>
+					<foreach name="bcList" item="bcVO" >
+					  <a href="__APP__/articles/{$bcVO.id}.html">{$bcVO.name}</a>
+					</foreach>
+				  </div>
+				</li>
+				<li><a href="{:U('Resource/index')}" >资源下载</a>
+				  <div>
+					<foreach name="rcList" item="rcVO" >
+					  <a href="__APP__/sources/{$rcVO.id}.html">{$rcVO.title}</a>
+					</foreach>
+				  </div>
+				</li>
+				<!--<li><a href="{:U('Project/index')}" >开源项目</a>
+					<div></div>
+				</li>
+				-->
+			  </ul>
+			</div>
+			
+			<div id="index-search" >
+			  <form name="f1" target="_blank" action="http://www.baidu.com/baidu" >
+				<table bgcolor="#FFFFFF" style="font-size:9pt;">
+				  <tr><td>
+					  <input class="it-search-input" id="sinput" name="word" size="30" maxlength="100" />
+					  <input class="it-purple-button" id="search" type="submit" value="搜索" 
+                             onmouseout="this.style.backgroundPosition='-40px top'"
+							 onmouseover="this.style.backgroundPosition='-40px -49px'" />
+					  <input name="tn" type="hidden" value="bds" />
+					  <input name="cl" type="hidden" value="3" />
+					  <input name="ct" type="hidden" value="2097152" />
+					  <input name="si" type="hidden" value="www.itlodge.net" />
+				</td></tr></table>
+			  </form>
+            </div>
+          </div>
+		</div>
+		
+      </div>
+    </div>
+    <div id="container" >
+      <div id="headerWrap" >
+		<div id="header" >
+		</div>
+      </div>
+
+      <script type="text/javascript" >
+		onload = showTime();
+      </script>
+
+      <script type="text/javascript">
+		show_navi();
+      </script>
+
+      <script type="text/javascript" >
+		if(!document.all){
+		document.getElementById("index-search").style.marginTop = '10px';
+		}
+      </script>

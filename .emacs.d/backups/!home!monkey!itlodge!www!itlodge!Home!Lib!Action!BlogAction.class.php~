@@ -1,0 +1,187 @@
+<?php
+/*
+ * date:2011-01-16
+ * author:Monkey
+ * Copyright (c) 2012 http://www.itlodge.net All rights reserved.
+ *
+ */
+class BlogAction extends MyAction{
+
+    function index() {
+		import("@.Util.Page");
+		$bcid = $_GET['bcid'];
+    	if($bcid){
+        	$condition = "bcategory_id='$bcid'";
+        }else{
+        	$condition = '1=1';
+        }
+		$count = $this->blog->where($condition)->count();
+		$p = new Page($count,15);
+		$p->setConfig('header',"篇文章");
+		$p->setConfig('first', '首页');
+        $p->setConfig('last', '尾页');
+        
+		$bList = $this->blog->where($condition)->order("publish_time DESC")->
+			limit($p->firstRow . ',' . $p->listRows)->select();
+		for($i = 0; $i < count($bList); $i++){
+			$bList[$i]["content"] = it_msubstr($bList[$i]['content'],0,500);
+			$bList[$i]["content"] = Html2Text($bList[$i]['content'],1);
+			$bList[$i]["content"] = it_msubstr($bList[$i]['content'],0,200,'...');
+		}
+		$page = $p->show();
+		$this->assign("page",$page);
+		$this->assign("bList",$bList);
+
+		/*分类*/
+		$biList = $this->bindex->order("blogs desc")->select();
+		$this->assign("biList",$biList);
+
+		if($bcid){
+			$category = $this->bindex->field(array('id','name'))->where("id='$bcid'")->find();
+			$this->assign("category",$category);
+		}
+		
+		/*图片文章*/
+		$imgList = $this->blog->where("content like '%base64%/>'")->order('publish_time desc')->limit('5')->select();
+		for($i = 0; $i < count($imgList); $i++){
+			$imgList[$i]['img'] = $this->get_img($imgList[$i]['content']);
+		}
+		$this->assign("imgList",$imgList);
+		
+		/* 新闻 */
+		$bnList = $this->news->field(array('id','title'))->order('publish_time DESC')->limit(10)->select();
+		$this->assign('bnList',$bnList);
+		
+		/* $recomList = $this->blog->field(array('id','title'))->order('rand()')->limit('10')->select();
+		$this->assign("recomList",$recomList); */
+				
+		$all = $this->blog->count();
+		$this->assign('blogs',$all);
+		
+		$title = "IT博客 - 个人原创技术博客";
+		$this->assign("title",$title);
+    	$this->display();
+    }
+
+	function add()
+	{
+		$biList = $this->bindex->select();
+		$this->assign("biList",$biList);
+		
+		$this->display();
+	}
+
+	function insert()
+	{
+		/* $data['content'] = $_POST['content'];
+		$data['title'] = $_POST['title'];
+		$data['bcategory_id'] = $_POST['bcategory_id'];
+		$data['keywords'] = $_POST['keywords']; */
+		//$this->blog->data($data)->add();
+		$this->blog->create();
+		$this->blog->add();
+		$bid = $_POST['bcategory_id'];
+		$this->bindex->where("id='$bid'")->setInc('blogs');
+		$this->redirect("index");
+	}
+
+	function view()
+	{
+		$id = $_GET["id"];
+		$dao = D("BlogView");
+		$blog = $dao->where("Blog.id='$id'")->find();
+		$blog['bcontent'] = $blog['bcontent'];
+		
+		$data['reads'] = $blog['breads'] + 1;
+		$dao->where("Blog.id='$id'")->save($data);		//reads plus
+		
+		$title = $blog['btitle']." - 电脑狂 - IT世界";	//title
+		$this->assign("title",$title);
+		
+		$keywords = $blog['bkeywords'];				
+		$keywords = str_replace(' ',',',$keywords);		//keywords
+		$this->assign("keywords",$keywords);
+		
+		$dsrp = Html2Text($blog['bcontent'],1);
+		$this->assign("dsrp",msubstr($dsrp,0,80)."...");	//description
+		
+		$this->assign("vo",$blog);
+
+		$all = $dao->count();
+		$this->assign('blogs',$all);
+		
+		
+		/*分类*/
+		$biList = $this->bindex->order("blogs desc")->select();
+		$this->assign("biList",$biList);
+		
+		/* 新闻 */
+		$bnList = $this->news->field(array('id','title'))->order('publish_time DESC')->limit('10')->select();
+		$this->assign('bnList',$bnList);
+		
+		$recomList = $this->blog->field(array('id','title'))->order('rand()')->limit('10')->select();
+		$this->assign("recomList",$recomList);
+				
+		$popList = $this->blog->field(array('id','title'))->order("`reads` desc")->limit(10)->select();
+		$this->assign("popList",$popList);
+				
+		$last = $this->blog->field(array('id','title'))->where("id < '$id'")->order('id desc')->limit(1)->find();
+		$this->assign('last',$last);
+		
+		$next = $this->blog->field(array('id','title'))->where("id > '$id'")->order('id asc')->limit(1)->find();
+		$this->assign('next',$next);
+		
+    	$this->display();
+	}
+
+	function edit()
+	{
+		$id = $_GET["id"];
+		$bVO = $this->blog->where("id=$id")->find();
+		$bVO['content'] = htmlspecialchars($bVO['content']);
+		$this->assign("bVo",$bVO);
+		$this->assign("realid",$bVO['bcategory_id']);
+		
+		$biList = $this->bindex->select();
+		$this->assign("biList",$biList);
+		
+    	$this->display();
+	}
+	function save()
+	{
+		$id = $_GET["id"];
+		$this->blog->create();
+		$this->blog->where("id=$id")->save();
+		$this->redirect("index");
+	}
+	function delete()
+	{
+		$id = $_GET["id"];
+		$bid = $this->blog->where("id='$id'")->getField('bcategory_id');
+		$this->blog->where("id=$id")->delete();
+		$this->bindex->setDec('blogs',"id='$bid'");
+		
+		$this->redirect("index");
+	}
+	
+	function addCategory()
+	{
+		$this->display();
+	}
+	
+	function insertCategory()
+	{
+		$data = $this->bindex->create();
+		$this->bindex->add($data);
+		$this->redirect('blank');
+	}
+	
+	function get_img($str)
+	{
+		$start = stripos($str,"<img",0);
+		$end = stripos($str,"/>",$start);
+		return substr($str,$start,$end - $start + 2);
+	}
+}
+
+?>

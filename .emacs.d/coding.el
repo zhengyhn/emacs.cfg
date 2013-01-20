@@ -1,5 +1,6 @@
 ;the cfg for coding
 
+
 ;;==========
 ;;comment
 ;;===============================================
@@ -64,7 +65,23 @@
 (load-file (concat plugins-path "sr-speedbar.el"))
 (require 'sr-speedbar)
 (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
+;;=================================================
 
+;;=================
+;;cc-mode,php-mode
+;;=========================================================
+(load-file (concat plugins-path "php-mode.el"))
+(require 'php-mode)
+;;=========================================================
+
+;;==========
+;;yaSnippet
+;;===========================
+(add-to-list 'load-path (concat plugins-path "yasnippet"))
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;============================
 
 ;;=================================================================
 ;;gtags

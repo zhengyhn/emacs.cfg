@@ -20,7 +20,7 @@ This store is a containner which pulls data from remote server, and
 feed data to music player")
 
 ;(defvar channel-number (random 20))
-(defvar channel-number (random 2))
+(defvar channel-number 1)
 
 (defcustom douban-music-server (concat "http://douban.fm/j/mine/playlist?type=n&channel="  
 				      (number-to-string channel-number))
@@ -83,7 +83,8 @@ feed data to music player")
     ( if (eq nil local-music-store )
 	(progn 
 	  (douban-music-fetch-songs-from-server)
-	  (setq channel-number (random 20))
+;	  (setq channel-number (random 20))
+  	  (setq channel-number 1)
 	  )
       )
     (if (eq nil local-music-store)

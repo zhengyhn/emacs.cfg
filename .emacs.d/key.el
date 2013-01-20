@@ -12,3 +12,5 @@
 
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)   ;ctrl+mouse change
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)   ;font size
+
+(global-set-key (kbd "C-c i") 'image-dired)   ;for image view

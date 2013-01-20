@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main()
+{
+	int x = 2,y = 3;
+	int temp;
+
+	temp = y < y ? x * x : y--;
+	printf("%d\n",temp);
+	temp = ++x + temp;
+	printf("%d\n",temp);
+	y *= temp;
+
+	printf("%d\n",y);
+
+	return 0;
+}

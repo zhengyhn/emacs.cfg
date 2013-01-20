@@ -1,5 +1,11 @@
 ;the cfg for life
 
+;;======
+;;global
+;;=========================
+(setq url-proxy-services '(("http" . "127.0.0.1:8087")))   ;for goagent
+;;======================================================================
+
 ;=======================weibo===========================
 (add-to-list 'load-path (concat plugins-path "weibo"))
 (require 'weibo)
@@ -19,15 +25,31 @@
 
 ;;=========================================================
 
-;===============================org-mode======================================
+;;===========================
+;;google-maps,google-weather
+;;=======================================================
+;(add-to-list 'load-path (concat plugins-path "google-maps"))
+;(require 'google-maps)
+;(add-to-list 'load-path (concat plugins-path "google-weather"))
+;(require 'google-weather)
+;(require 'org-google-weather)
+;;=======================================================
+
+;===============================org-mode=====================================
 ;(setq org-export-odt-preferred-output-format "doc")
-;=============================================================================
+(setq org-agenda-files (concat cfg-dir "org"))
 
+;============================================================================
 
-;;================jabber===================================
-;(add-to-list 'load-path (concat plugins-path "emacs-jabber"))
-;(require 'jabber)
-;(require 'jabber-autoloads)
+;;==========
+;;jabber
+;;=============================================================
+(add-to-list 'load-path (concat plugins-path "emacs-jabber-0.8.91"))
+(require 'jabber-autoloads)
+(setq jabber-account-list
+	  '(("zhengyhn@gmail.com"
+		 (:network-server . "talk.google.com")
+		 (:connection-type . ssl))))
 ;;=========================================================
 
 ;;========================emms=============================
