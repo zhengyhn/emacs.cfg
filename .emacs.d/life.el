@@ -6,24 +6,28 @@
 (setq url-proxy-services '(("http" . "127.0.0.1:8087")))   ;for goagent
 ;;======================================================================
 
-;=======================weibo===========================
-(add-to-list 'load-path (concat plugins-path "weibo"))
-(require 'weibo)
-(global-set-key (kbd "C-c w") 'weibo-timeline)
-;=======================================================
+;;org-mode
+(load-file (concat cfg-dir "org-config.el"))
+
+;;weibo
+(load-file (concat cfg-dir "weibo-config.el"))
+
+;;jabber-mode
+(load-file (concat cfg-dir "jabber-config.el"))
 
 ;=======================stardict========================
 (load-file (concat plugins-path "sdcv-mode.el"))
 (require 'sdcv-mode)
-(global-set-key (kbd "C-c d") 'sdcv-search)
+(global-set-key (kbd "<f8>") 'sdcv-search)
 ;=======================================================
 
 ;;================douban music=============================
-(load-file (concat plugins-path "douban-music.el"))
-(require 'douban-music)
-(global-set-key (kbd "M-n") 'douban-music-play-next-song)
-
+;(load-file (concat plugins-path "douban-music.el"))
+;(require 'douban-music)
 ;;=========================================================
+
+;;emms
+;(load-file (concat cfg-dir "emms-config.el"))
 
 ;;===========================
 ;;google-maps,google-weather
@@ -35,51 +39,7 @@
 ;(require 'org-google-weather)
 ;;=======================================================
 
-;===============================org-mode=====================================
-;(setq org-export-odt-preferred-output-format "doc")
-(setq org-agenda-files (concat cfg-dir "org"))
-
-;============================================================================
-
-;;==========
-;;jabber
-;;=============================================================
-(add-to-list 'load-path (concat plugins-path "emacs-jabber-0.8.91"))
-(require 'jabber-autoloads)
-(setq jabber-account-list
-	  '(("zhengyhn@gmail.com"
-		 (:network-server . "talk.google.com")
-		 (:connection-type . ssl))))
-;;=========================================================
-
-;;========================emms=============================
-;(add-to-list 'load-path (concat plugins-path "emms-3.0"))
-;(setq exec-path (append exec-path '("/usr/bin")))
-;(require 'emms-setup)
-;(require 'emms-player-mplayer)
-;(emms-standard)
-;(emms-default-players)
-;(setq emms-player-list '(emms-player-mplayer)
-;	  emms-player-mplayer-command-name "mplayer"
-;	  emms-player-mplayer-parameters '("-slave"))
-;(setq emms-repeat-playlist nil
-;	  emms-source-file-default-directory "~/movie"
-;	  emms-lyrics-dir "~/movie/"
-;	  emms-lyrics-coding-system nil
-;	  emms-playlist-buffer-name "*EMMS*")
-;(global-set-key (kbd "C-c e g") 'emms-play-directory)
-;(global-set-key (kbd "C-c e d") 'emms-play-dired)
-;(global-set-key (kbd "C-c e v") 'emms-playlist-mode-go)
-;(global-set-key (kbd "C-c e x") 'emms-start)
-;(global-set-key (kbd "C-c e SPC") 'emms-pause)
-;(global-set-key (kbd "C-c e s") 'emms-stop)
-;(global-set-key (kbd "C-c e n") 'emms-next)
-;(global-set-key (kbd "C-c e p") 'emms-previous)
-;;=========================================================
-
-
 ;=======================emacs-w3m===========================================
-
 ;(add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m")
 ;;Enable Cookies
 ;(setq w3m-use-cookies t)
@@ -98,7 +58,6 @@
 ;		  (lambda (url)
 ;			(rename-buffer 
 ;			 (format "*w3m: %s*" (or w3m-current-title w3m-current-url)) t)))
-
-;=============================================================================
+;==========================================================================
 
 

@@ -1,9 +1,9 @@
-;; -*- emacs-lisp -*- <13/01/17 15:30:18 /home/monkey/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <13/02/11 11:54:55 /home/monkey/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
 ((["sudo" "root" "itlodge" nil]
-  ("uname" "Linux 3.6.11-1-ARCH")
+  ("uname" "Linux 3.7.4-1-ARCH")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/usr/sbin" "/usr/local/bin"))
@@ -12,11 +12,16 @@
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
-  ("~root" "/root")
-  ("file-exists" "test -e")
   ("readlink" "\\readlink")
   ("stat" "\\stat")
-  ("ls" "/bin/ls --color=never")
+  ("file-exists" "test -e")
   ("id" "/usr/bin/id")
   ("gid-integer" 0)
-  ("uid-integer" 0)))
+  ("uid-integer" 0)
+  ("local-encoding" base64-encode-region)
+  ("local-decoding" base64-decode-region)
+  ("remote-encoding" "base64")
+  ("remote-decoding" "base64 -d -i")
+  ("inline-compress" "gzip")
+  ("inline-decompress" "gzip -d")
+  ("~root" "/root")))

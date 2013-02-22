@@ -3,7 +3,7 @@
 (setq inhibit-startup-screen t)    ;don't show welcome buffer
 
 (fset 'yes-or-no-p 'y-or-n-p)      ;y or n instead of yes or no
-
+(display-time)                     ;display clock
 (global-linum-mode t)              ;show line and column number
 (setq column-number-mode t)
 
@@ -15,8 +15,6 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)                 ;disable toolbar,menubar and scrollbar
 (scroll-bar-mode -1)
-
-(display-time)                     ;display clock
 
 ;;======
 ;;theme
@@ -56,8 +54,6 @@
 ;all *~ files in one place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))     
 
-;;font
-;;(set-default-font "-monotype-Courier New-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1") 
 (set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
 
 ;;============
@@ -73,3 +69,9 @@
 	(set-frame-parameter (selected-frame) 'alpha '(100 100))))
 (global-set-key [(f11)] 'toggle-transparent)
 ;;=====================================================================
+
+;;=========
+;;user info
+;;=====================
+(setq user-full-name "yuanhang zheng"
+	  user-mail-address "zhengyhn@gmail.com")

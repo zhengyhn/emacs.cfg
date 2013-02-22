@@ -1,5 +1,3 @@
-;the cfg for coding
-
 
 ;;==========
 ;;comment
@@ -13,7 +11,6 @@
 ;======================================================
 (load-file (concat plugins-path "guess-offset.el"))
 (require 'guess-offset)
-;(add-hook 'c-mode-common-hook '(lambda()(c-toggle-auto-state 1)))
 (load-file (concat plugins-path "smart-tab.el"))
 
 ;c/c++ style
@@ -28,9 +25,7 @@
 ;(load-file (concat plugins-path "pascal.el"))
 ;(require 'pascal)
 ;(autoload 'pascal-mode "pascal" "Pascal Mode." t)
-
 ;======================================================
-
 
 ;==============
 ;smart complie
@@ -45,8 +40,12 @@
 ;===================================================================
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete//ac-dict")
+(add-to-list 'ac-dictionary-directories
+			 "~/.emacs.d/plugins/auto-complete/ac-dict")
 (ac-config-default)
+(setq ac-modes
+	  (append ac-modes '(org-mode)
+			  '(ielm)))
 ;======================================================================
 
 ;;=======
@@ -62,17 +61,10 @@
 ;;=========
 ;;srSpeedbar
 ;;=================================================
-(load-file (concat plugins-path "sr-speedbar.el"))
-(require 'sr-speedbar)
-(global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
+;; (load-file (concat plugins-path "sr-speedbar.el"))
+;; (require 'sr-speedbar)
+;; (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
 ;;=================================================
-
-;;=================
-;;cc-mode,php-mode
-;;=========================================================
-(load-file (concat plugins-path "php-mode.el"))
-(require 'php-mode)
-;;=========================================================
 
 ;;==========
 ;;yaSnippet
@@ -81,7 +73,23 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+;;key
+;=text
+;email
+;user
+;=c-mode
+;once:#ifndef
+;main
+;inc:#include
+;p:printf
 ;;============================
+
+;;=================
+;;php-mode
+;;=========================================================
+;; (load-file (concat plugins-path "php-mode.el"))
+;; (require 'php-mode)
+;;=========================================================
 
 ;;=================================================================
 ;;gtags
@@ -99,7 +107,6 @@
 ;======================================================================
 ;cedet
 ;======================================================================
-
 ;(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el");
 ;(global-ede-mode 1)
 
@@ -161,11 +168,9 @@
 ;==========================================================
 ;web-mode
 ;==========================================================
-
 ;(load-file "~/.emacs.d/plugins/web-mode.el")
 ;(require 'web-mode)
 ;(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
 ;===========================================================

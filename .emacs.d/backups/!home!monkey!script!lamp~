@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "abc" | sudo systemctl start httpd
-echo "abc" | sudo systemctl start mysqld
