@@ -1,0 +1,62 @@
+<?php
+/*
+ * date:2011-01-16
+ * author:Monkey
+ * Copyright (c) 2012 http://www.itlodge.net All rights reserved.
+ *
+ */
+Load("extend");
+class MyAction extends Action{
+	protected $blog;
+	protected $news;
+	protected $resource;
+	protected $player;
+	protected $bindex;
+	protected $ncategory;
+	protected $ad;
+	protected $friend;
+	
+    function _initialize() {
+    	header("Content-Type:text/html;charset=utf-8");
+    	
+    	$this->blog = M("Blog");
+    	$this->news = M('News');
+    	$this->resource = M("Resource");
+    	$this->player = M('Player');
+    	$this->bindex = M('Bindex');
+    	$this->ncategory = M('Ncategory');
+    	$this->ad = D("AdView");
+    	$this->friend = M("Friend");
+    	$this->config = M("Config");
+    	
+    	$title = $this->config->where("name='it_title'")->getField('value');
+    	$keywords = $this->config->where("name='it_keywords'")->getField('value');
+    	$dsrp = $this->config->where("name='it_dsrp'")->getField('value');
+    	$this->assign("title",$title);
+    	$this->assign("keywords",$keywords);
+    	$this->assign("dsrp",$dsrp);
+    	
+    	//访问量
+    	$ac = get_access();
+		$this->assign("today",$ac["today"]);
+		$this->assign("total",$ac["total"]);
+		
+		//友链
+		$fList = $this->friend->select();
+		$this->assign("fList",$fList);
+		
+		//下拉菜单
+		$bcList = $this->bindex->order('blogs desc')->limit(10)->select();
+		$this->assign("bcList",$bcList);
+		
+		$ncList = $this->ncategory->select();
+		$this->assign("ncList",$ncList);
+		
+		$rcList = $this->resource->where("type=0")->select();
+		$this->assign("rcList",$rcList);
+		
+		$aList = $this->ad->select();
+		$this->assign("aList",$aList);
+    }
+}
+?>

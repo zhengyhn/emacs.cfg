@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+	int a, b = 10;
+
+	__asm__("movl %1, %%eax\n\t"
+	        "movl %%eax, %0\n\t"
+	        :"=r"(a)
+	        :"r"(b)
+	        :"%eax"
+		);
+	printf("a:%d\n", a);
+	
+	return 0;
+}

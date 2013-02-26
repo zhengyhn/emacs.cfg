@@ -3,7 +3,7 @@
 ;;======
 ;;global
 ;;=========================
-(setq url-proxy-services '(("http" . "127.0.0.1:8087")))   ;for goagent
+;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))   ;for goagent
 ;;======================================================================
 
 ;;org-mode
@@ -18,7 +18,7 @@
 ;=======================stardict========================
 (load-file (concat plugins-path "sdcv-mode.el"))
 (require 'sdcv-mode)
-(global-set-key (kbd "<f8>") 'sdcv-search)
+(global-set-key (kbd "C-c d") 'sdcv-search)
 ;=======================================================
 
 ;;================douban music=============================

@@ -4,8 +4,15 @@
 (require 'jabber-autoloads)
 (setq jabber-account-list
 	  '(("zhengyhn@gmail.com"
+		(:password . " mvfcbuvemzqlcead ") 
 		(:network-server . "talk.google.com")
 		(:connection-type . ssl))))
+
+
 (global-set-key (kbd "C-c j c") 'jabber-connect-all)
-(global-set-key (kbd "C-c j v") 'jabber-display-roster)   ;visit
+(global-set-key (kbd "C-c j v") '(lambda ()
+								   "visit jabber roster"
+								   (interactive)
+								   (jabber-display-roster)
+								   (switch-to-buffer "*-jabber-roster-*")))
 

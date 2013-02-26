@@ -1,0 +1,282 @@
+#+TITLE:     introduction
+#+AUTHOR:    yuanhang zheng
+#+EMAIL:     zhengyhn@gmail.com
+#+DATE:      2013-02-16 Sat
+
+* what is haskell
+- haskell是一种纯粹的函数式编程语言
+- 没有副作用
+- 一种懒惰的语言，只有当要显示结果的时候才执行函数
+- 静态类型化，不用指定类型，编译器能自己决定
+- 高雅，简洁，代码量少
+- 由顶尖人才发明
+* how to program
+- 2个著名的haskell编译器是GHC(glasgow haskell compiler)和Hugs
+- 安装完ghc后，在终端打ghci，可以进入互动形式的编程环境，就像python和ielm
+#+BEGIN_EXAMPLE
+[monkey@itlodge note]$ ghci
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Prelude> 
+#+END_EXAMPLE
+这里的是Prelude>，可以通过
+#+BEGIN_EXAMPLE
+Prelude> :set prompt "ghci> "
+ghci> 
+#+END_EXAMPLE
+来修改成ghci>
+* play
+- 来玩点数学运算：
+#+BEGIN_SRC haskell
+ghci> 1 + 2
+3
+ghci> 1991 * 1992
+3966072
+ghci> 1992 - 19
+1973
+ghci> 1992 / 19
+104.84210526315789
+ghci> 5 * (-1 - 1)
+-10
+ghci> 5 * -1
+
+<interactive>:9:1:
+    Precedence parsing error
+        cannot mix `*' [infixl 7] and prefix `-' [infixl 6] in the same infix
+ expression
+ghci> 5 * (-1)
+-5
+ghci> 
+#+END_SRC
+- 再来玩一点布尔运算
+#+BEGIN_SRC haskell
+ghci> True && False
+False
+ghci> False || True
+True
+ghci> not True
+False
+ghci> not (False || True)
+False
+ghci> 1 == 1
+True
+ghci> 1 == 1.0
+True
+ghci> 1 /= 1.0
+False
+ghci> "abc" == "abc"
+True
+ghci> 
+#+END_SRC
+- +和*这种也是函数，它们是中缀函数，因为夹在两个操作数之间
+- 前缀函数，格式如下：
+#+BEGIN_EXAMPLE
+function-name space parameters
+#+END_EXAMPLE
+如haskell中最无聊的函数succ：
+#+BEGIN_SRC haskell
+ghci> succ 7
+8
+ghci> 
+#+END_SRC
+succ函数用于返回一个对象的successor
+再看：
+#+BEGIN_SRC haskell
+ghci> min 1.2 2
+1.2
+ghci> max 1991 1991
+1991
+ghci> max 222 111
+222
+#+END_SRC
+- 函数的优先级最高，看下例：
+#+BEGIN_SRC haskell
+ghci> min 2 3 + max 4 5 + 2
+9
+ghci> (min 2 3) + (max 4 5) + 2
+9
+#+END_SRC
+上面两行是等价的。所以，当我们要求4和5 + 2的最大值时，要这样：
+#+BEGIN_SRC haskell
+ghci> max 4 (5 + 2)
+7
+#+END_SRC
+- 如果一个前缀函数有2个参数，我们也可以把它改成中缀函数。比如div函数，看下例，
+我们不知道是100除以10还是10除以100,所以改成中缀函数会清晰很多。方法是给div
+加上backtick（即`号，在我键盘上是和波浪号一个键的）
+#+BEGIN_SRC haskell
+ghci> div 100 10
+10
+ghci> 100 `div` 10
+10
+ghci> 100 / 10
+10.0
+#+END_SRC
+* baby's first function
+- 新建一个文件test.hs，写一个函数：
+#+BEGIN_SRC haskell
+twice x = x + x
+#+END_SRC
+其中函数名叫twice，只有一个参数x
+然后打开ghci编译：
+#+BEGIN_SRC haskell
+ghci> :l ~/test/haskell/test.hs 
+[1 of 1] Compiling Main             ( /home/monkey/test/haskell/test.hs, interpreted )
+Ok, modules loaded: Main.
+ghci> twice 4
+8
+#+END_SRC
+:l中l是load的意思，把这个script load进来，然后它会编译，就可以使用这个函数了。
+- 带2个参数的是类似这样的：
+#+BEGIN_SRC haskell
+twice x y = x * 2 + y * 2
+#+END_SRC
+- haskell中函数没有调用的顺序之分，不用考虑哪个函数使用哪个函数而要先声明哪个函数。
+- if结构，else是必须要有的。
+#+BEGIN_SRC haskell
+twice x = if x > 10
+             then x
+             else x * 2
+#+END_SRC
+- 撇号的英文：apostrophe
+- 撇号用于函数名的时候，可以表示这是个严格（不懒惰）的函数，或者是一个已经
+修改过的函数。
+- 函数名不能以大写开头
+- 没有参数的函数称为定义definition（或名字name）
+
+* an intro to lists
+** 列表是齐次的数据结构，存储了相同类型的元素
+** 有点像数组，可以使用let来定义一个名字：
+#+BEGIN_SRC haskell
+ghci> let num = [1, 2, 3, 4, 5]
+ghci> num
+[1,2,3,4,5]
+#+END_SRC
+可见，list通过方括号(square bracket)来定义，元素由逗号(comma)来分隔开。
+但是这样却是不行的：
+#+BEGIN_SRC haskell
+ghci> let num = [1, 'a']
+
+<interactive>:16:12:
+    No instance for (Num Char) arising from the literal `1'
+    Possible fix: add an instance declaration for (Num Char)
+    In the expression: 1
+    In the expression: [1, 'a']
+    In an equation for `num': num = [1, 'a']
+#+END_SRC
+** 连接两个list，使用++
+#+BEGIN_SRC haskell
+ghci> [1, 2, 3] ++ [4, 5, 6]
+[1,2,3,4,5,6]
+#+END_SRC
+注意，不要用在很长的list里面上，因为haskell会遍历++左边的list。
+** 使用:(cons operator)来把元素放在list的左边
+#+BEGIN_SRC haskell
+ghci> 0 : [1, 2, 3]
+[0,1,2,3]
+#+END_SRC
+** []为空list
+** 可以这样连接：
+#+BEGIN_SRC haskell
+ghci> 1 : 2 : []
+[1,2]
+#+END_SRC
+** 通过下标拿到一个元素(下标从0开始)：
+#+BEGIN_SRC haskell
+ghci> [1, 2, 3] !! 1
+2
+#+END_SRC
+** list的比较：
+#+BEGIN_SRC haskell
+ghci> [3, 2, 1] > [3, 1, 2]
+True
+ghci> [1, 2, 3] /= [1, 2, 3]
+False
+#+END_SRC
+** 一些基础的对list的操作函数
+- 获取头部元素：
+#+BEGIN_SRC haskell
+ghci> head [1, 2, 3]
+1
+#+END_SRC
+- 获取尾（即去掉第一个元素）：
+#+BEGIN_SRC haskell
+ghci> tail [1, 2, 3]
+[2,3]
+#+END_SRC
+- 获取尾部元素：
+#+BEGIN_SRC haskell
+ghci> last [1, 2, 3]
+3
+#+END_SRC
+- 获取头（即去掉最后一个元素）：
+#+BEGIN_SRC haskell
+ghci> init [1, 2, 3]
+[1,2]
+#+END_SRC
+- 取得长度：
+#+BEGIN_SRC haskell
+ghci> length [1, 2, 3]
+3
+#+END_SRC
+- 判断是否为空：
+#+BEGIN_SRC haskell
+ghci> null [1, 2, 3]
+False
+ghci> null []
+True
+#+END_SRC
+- 翻转
+#+BEGIN_SRC haskell
+ghci> reverse [1, 2, 3]
+[3,2,1]
+#+END_SRC
+- 从头截断并拿到list
+#+BEGIN_SRC haskell
+ghci> take 2 [1, 2, 3]
+[1,2]
+ghci> take 5 [1, 2, 3]
+[1,2,3]
+ghci> take 0 [1, 2, 3]
+[]
+#+END_SRC
+- 从头截断并丢掉list
+#+BEGIN_SRC haskell
+ghci> drop 2 [1, 2, 3]
+[3]
+ghci> drop 5 [1, 2, 3]
+[]
+ghci> drop 0 [1, 2, 3]
+[1,2,3]
+#+END_SRC
+- 求最大最小值
+#+BEGIN_SRC haskell
+ghci> maximum [1, 2, 3]
+3
+ghci> minimum [1, 2, 3]
+1
+#+END_SRC
+- 求和
+#+BEGIN_SRC haskell
+ghci> sum [1, 2, 3]
+6
+#+END_SRC
+- 求积
+#+BEGIN_SRC haskell
+ghci> product [2, 3, 4]
+24
+#+END_SRC
+- 判断元素是否在list中
+#+BEGIN_SRC haskell
+ghci> 2 `elem` [1, 2, 3]
+True
+ghci> elem 2 [1, 2, 3]
+True
+ghci> elem 10 [1, 2, 3]
+False
+ghci> 10 `elem` [1, 2, 3]
+False
+#+END_SRC
+* texas ranges

@@ -1,0 +1,39 @@
+<!--
++---------------------------------------------------------------
+|Date:2012-01-15
++---------------------------------------------------------------
+|Copyright (c) 2012 http://www.itlodge.net All rights reserved.
++---------------------------------------------------------------
+|Author:Monkey
++---------------------------------------------------------------
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="__PUBLIC__/css/common.css" type="text/css" rel="stylesheet" media="all" />
+		<link href="__PUBLIC__/css/admin.css" type="text/css" rel="stylesheet" media="all" />
+		<script type="text/javascript" src="__PUBLIC__/js/common.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.js" ></script>
+		<title>后台管理</title>
+	</head>
+	<body>
+		<div id="container" >
+			<div id="admin-top" >IT世界 - 后台管理</div>
+			<div id="admin-navi" >
+				<li><a href="__APP__" >后台首页</a></li>
+				<li><a href="__APP__/Player" >图片播放器管理</a></li>
+				<li><a href="__APP__/News" >新闻管理</a></li>
+				<li><a href="__APP__/Blog" >博客管理</a></li>
+				<li><a href="__APP__/Resource" >资源管理</a></li>
+				<li><a href="__APP__/Ad" >广告管理</a></li>
+				<li><a href="__APP__/Friend" >友链管理</a></li>
+				<li><a href="__PUBLIC__/../index.php/Blog/add" >写博客</a></li>
+				<li><a href="__PUBLIC__/../" >返回主页</a></li>
+			</div>
+			<div class="cBoth" ></div>
+			
+		
+<script type="text/javascript" >
+window.onload = show_news_navi('admin-navi');
+</script>

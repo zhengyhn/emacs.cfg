@@ -2,8 +2,8 @@
 ;File:.emacs
 ;Description:this is my emacs configuration file
 ;Author:yuanhang zheng
-;Upate date:2013-2-8
-;Blog:www.itlodge.net
+;Upate date:2013-2-27
+;Blog:www.zhengyuanhang.com
 ;------------------------------------------------
 
 ;=================== start =========================;

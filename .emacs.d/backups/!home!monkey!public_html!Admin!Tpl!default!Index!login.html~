@@ -1,0 +1,48 @@
+<!--
++---------------------------------------------------------------
+|Date:2012-01-15
++---------------------------------------------------------------
+|Copyright (c) 2012 http://www.itlodge.net All rights reserved.
++---------------------------------------------------------------
+|Author:Monkey
++---------------------------------------------------------------
+ -->
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="__PUBLIC__/css/common.css" type="text/css" rel="stylesheet" media="all" />
+		<link href="__PUBLIC__/css/admin.css" type="text/css" rel="stylesheet" media="all" />
+		<title></title>
+	</head>
+	<body>
+		<div id="container" >
+			<div id="loginWrap" >
+				<div id="login" >
+					<form method="post" action="__URL__/doLogin" >
+						<table>
+							<tr>
+							<td><input class="it-short-input" type="text" name="username" id="uname" /></td></tr>
+							<tr>
+							<td><input class="it-short-input" type="password" name="pwd" /></td></tr>
+							<tr>
+							<td>
+								<input class="it-purple-button" type="button" value="login" 
+									onmouseout="this.style.backgroundPosition='-40px top'"
+									onmouseover="this.style.backgroundPosition='-40px -49px'" />
+								<input class="it-purple-button" type="submit" value="return" 
+									onmouseout="this.style.backgroundPosition='-40px top'"
+									onmouseover="this.style.backgroundPosition='-40px -49px'" />
+							</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+<script type="text/javascript" >
+document.getElementById('uname').focus();
+</script>
+</html>

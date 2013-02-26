@@ -1,0 +1,23 @@
+<include file="Public:header" />
+
+<div id="admin-content" >
+	<div class="it-table" >
+		<div class="admin-title" >
+			管理新闻<span class="add" ><a href="__URL__/add" >写新闻</a></span>
+		</div>
+		<table>
+			<tr><th>标题</th><th>分类</th><th>发表时间</th><th>阅读</th><th>编辑</th><th>删除</th></tr>
+			<foreach name="nList" item="nVo" >
+			<tr><td><a href="__URL__/view/id/{$nVo.id}" >{$nVo.ntitle}</a></td>
+			<td>{$nVo.ncname}</td><td>{$nVo.npt}</td><td>{$nVo.nreads}</td>
+			<td><a href="__URL__/edit/id/{$nVo.nid}" >编辑</a></td>
+			<td><a href="__URL__/delete/id/{$nVo.nid}" onclick="return confirm('确定要删除这篇新闻?')" >删除</a></td>
+			</tr>
+			</foreach>
+		</table>
+	</div>
+	<div class="it-page" >{$page}</div>
+</div>
+
+
+<include file="Public:footer" />

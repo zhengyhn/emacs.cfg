@@ -1,0 +1,109 @@
+<include file="Public:header" />
+
+<div id="blog-mainWrap" >
+  <div id="blog-list" class="it-list" >
+    <div class="it-title" ><span>当前位置:<a href="__APP__" >首页</a> -> 
+		<a href="__URL__" >原创博客</a><if condition="$category neq null">&nbsp-> 
+		  <a href="__APP__/articles/{$category.id}.html" >{$category.name}</a></if></span>
+      <if condition="isset($_SESSION['itlodge'])" >
+ 		<span id="write" ><a href="__URL__/add" >写博客</a></span>
+      </if>
+    </div>
+    <volist name="bList" id="bVo" >
+      <div class="blog-title" >
+		<li><a href="__APP__/article/{$bVo.id}.html" target="_blank" >{$bVo.title}</a></li>
+      </div>
+      <if condition="isset($_SESSION['itlodge'])" >
+		<div class="fRight" >
+		  <a href="__URL__/delete/id/{$bVo.id}" onclick="return confirm('确定要删除这篇文章?')" >删除</a>
+		</div>
+      </if>
+      <if condition="isset($_SESSION['itlodge'])" >
+		<div class="fRight mRight" ><a href="__URL__/edit/id/{$bVo.id}" >编辑&nbsp</a></div>
+      </if>
+      <div class="blog-dsrp">
+		<li>{$bVo.content}</li>
+      </div>
+      <div class="fRight" ><span>{$bVo.publish_time} </span> 
+		<span> 阅读{$bVo.reads} </span><span class="pll_comment_count_tag" style="display:none" ct="{count}条评论" ct0="暂无评论">http://www.itlodge.net/article/{$bVo.id}.html</span></div>
+      <div class="cBoth" ></div>
+    </volist>
+    <div class="it-page" >{$page}</div>
+  </div>
+  <div id="sideWrap" >
+    <div id="bindex" class="it-list side-bg" >
+	  <div class="it-title" >博文分类</div>
+	  <li><a href="__URL__" >全部({$blogs})</a></li>
+	  <volist name="biList" id="biVO" >
+		<li><a href="__APP__/articles/{$biVO.id}.html" >{$biVO.name}({$biVO.blogs})</a></li>	
+	  </volist>
+    </div>
+    <div class="it-ad" >
+	  <!-- <h3>推广链接：</h3> -->
+	  <php>
+		show_ad($aList,"ad_blog_list_right1");
+	  </php> 			
+    </div>		
+    <div class="it-list side-bg" >
+	  <div class="it-title" >相关新闻</div>
+	  <foreach name="bnList" item="bnVo" key='k' >
+		<div><a href="__APP__/info/{$bnVo.id}.html" >{$k+1}.{$bnVo.title}</a></div>
+		<if condition="$k lt 9" ><p class="it-hr" ></p></if>
+	  </foreach>
+    </div>
+    <div class="it-ad" >
+	  <!-- <h3>推广链接：</h3> -->
+	  <php>
+		show_ad($aList,"ad_blog_list_right2");
+	  </php> 			
+    </div>	
+    <div class="it-list side-bg" >
+	  <div class="it-title" >图片文章</div>
+	  <volist name="imgList" id="imgVO" >
+		<div class="imgWrap" >
+	      <div class="img-content" ><a href="__APP__/article/{$imgVO.id}.html" 
+									   title="{$imgVO.title}" >{$imgVO.img}</a></div>
+	      <div class="img-title">
+			{$imgVO.title|msubstr=0,20}
+	      </div>
+	      <div class="big-img" ><a href="__APP__/article/{$imgVO.id}.html" 
+								   title="{$imgVO.title}" >{$imgVO.img}</a></div>
+		</div>
+	  </volist>
+    </div>
+    <div class="it-ad" >
+	  <!-- <h3>推广链接：</h3> -->
+	  <php>
+		show_ad($aList,"ad_blog_list_right3");
+	  </php> 			
+    </div>	
+    <!-- <div class="it-list side-bg" >
+		 <div class="it-title" >推荐文章</div>
+		 <foreach name="recomList" item="recomVO" key='k' >
+	       <div>
+			 <a href="__APP__/article/{$recomVO.id}.html" 
+				title="{$recomVO.title}">{$recomVO.title|msubstr=0,15}</a>
+			 <if condition="$k lt 9" ><p class="it-hr" ></p></if>
+	       </div>
+		 </foreach>
+    </div> -->			
+  </div>
+</div>
+
+<script type="text/javascript" >
+  $(".imgWrap").mouseover(function(){
+  if(!document.all){
+  $(this).find(".big-img img").css({"display":"block"});
+  }
+  });
+
+  $(".imgWrap").mouseout(function(){
+  if(!document.all){
+  $(this).find(".big-img img").css("display","none");
+  }
+  
+  });
+</script>
+<script type="text/javascript" src="http://s2.pinglun.la/md/cc.js" charset="utf-8"></script>
+
+<include file="Public:footer" />

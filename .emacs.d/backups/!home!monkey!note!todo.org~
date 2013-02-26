@@ -1,0 +1,46 @@
+* HANGUP learn elisp
+  - State "HANGUP"     from "DOING"      [2013-01-26 Sat 17:15]
+  - State "DOING"      from "TODO"       [2013-01-23 Wed 22:47]
+* HANGUP learn org-mode
+  - State "HANGUP"     from "DOING"      [2013-01-26 Sat 17:15]
+  - State "DOING"      from "TODO"       [2013-01-23 Wed 22:47]
+* DONE read just for fun
+  - State "DONE"       from "HANGUP"     [2013-02-05 Tue 16:05]
+  - State "HANGUP"     from "DOING"      [2013-02-05 Tue 16:05]
+* DONE read c traps and pitfalls
+  - State "DONE"       from "HANGUP"     [2013-02-09 Sat 14:00]
+  - State "HANGUP"     from "DOING"      [2013-02-09 Sat 14:00]
+  - State "DOING"      from "TODO"       [2013-02-08 Fri 20:35]
+* DONE read the art of readable code  
+  - State "DONE"       from "DOING"     [2013-02-10 Sun 15:41]
+  - State "DOING"      from "TODO"       [2013-02-10 Sun 15:41]
+* DONE read the c programming language
+  - State "DONE"       from "HANGUP"     [2013-02-12 Tue 16:46]
+  - State "HANGUP"     from "DOING"      [2013-02-12 Tue 16:46]
+  - State "DOING"      from "TODO"       [2013-01-26 Sat 17:16]
+* DONE read the seven habits of highly effective people
+  - State "DONE"       from "HANGUP"     [2013-02-12 Tue 20:42]
+  - State "HANGUP"     from "DOING"      [2013-02-12 Tue 20:42]
+  - State "DOING"      from "TODO"       [2013-01-27 Sun 21:14]
+* DONE read 数学之美
+  - State "DONE"       from "HANGUP"     [2013-02-19 Tue 14:33]
+  - State "HANGUP"     from "DOING"      [2013-02-19 Tue 14:33]
+* DOING read linux c
+* DONE read 世界因你不同.李开复自传
+  - State "DONE"       from "HANGUP"     [2013-02-14 Thu 22:03]
+  - State "HANGUP"     from "DOING"      [2013-02-14 Thu 22:03]
+  - State "DOING"      from "TODO"       [2013-02-13 Wed 22:13]
+* DOING read abs-guide
+  - State "DOING"      from "TODO"       [2013-02-04 Mon 15:56]
+* DOING read elisp reference manual
+* DOING read learn you a haskell
+  - State "DOING"      from "TODO"       [2013-02-16 Sat 18:31]
+* DOING learn gtk
+* TODO read learn python the hard way
+* TODO read the algorithm design manual
+* TODO read careercup
+* TODO read writing solid code
+* TODO read the beauty of programming
+* TODO read how to read a book
+
+

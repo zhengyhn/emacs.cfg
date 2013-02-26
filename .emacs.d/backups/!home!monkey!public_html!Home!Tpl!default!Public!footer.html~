@@ -1,0 +1,35 @@
+<div id="go_to_top" onclick="window.scrollTo(0,0);return false;" ></div>
+		<div id="footerWrap" >
+			<div id="footer" >
+				<div id="friend">
+					<div class="it-title" >友情链接</div>
+					<div class="site-list">
+					<foreach name="fList" item="fVo" >
+					<li><a href="{$fVo.url}" target="_blank" >{$fVo.name}</a>&nbsp</li>
+					</foreach>
+					</div>
+				</div>
+			    <div id="copy" >
+			    Copyright 2012
+			    <a target="_blank" href="http://www.itlodge.net">IT Lodge
+			     </a>Designed by <a href="__ROOT__/21232f297a57a5a743894a0e4a801fc3.php" >Monkey</a>
+			    </div>
+			    <div id="tools" >
+			    	<script type="text/javascript">
+							var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+							document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3f72f88d98f5ce0d7ba4609bcfb02554' type='text/javascript'%3E%3C/script%3E"));
+					</script>
+					<a href="http://webscan.360.cn/index/checkwebsite/url/www.itlodge.net">
+						<img border="0" src="http://webscan.360.cn/status/pai/hash/b66e663ed403184bda3ab1732cc48397" alt="360" width="20" height="20"/>
+					</a>
+			    </div>
+			</div>
+		</div>
+<script type="text/javascript">
+<!--
+	back_top();
+//-->
+</script>
+		</div>
+	</body>
+</html>

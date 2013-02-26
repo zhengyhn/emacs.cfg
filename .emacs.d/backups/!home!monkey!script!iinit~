@@ -1,0 +1,23 @@
+#!/bin/sh
+#this is a script to init
+#author:monkey
+
+#disable the touchpad
+echo "abc" | sudo -S modprobe -r psmouse
+
+#kill the bad guy
+echo "abc" | sudo -S pkill emacs
+
+#start h3c
+connected=$(ifconfig eth0 | grep RUNNING)
+if [ "$connected" ]
+then
+    echo "abc" | sudo -S ip link set eth0 up
+    echo "1" | sudo yah3c
+    echo "1" | sudo yah3c
+	sudo dhcpcd
+fi
+
+#for goagent
+python2 /home/monkey/script/google_appengine/goagent/local/proxy.py &
+
