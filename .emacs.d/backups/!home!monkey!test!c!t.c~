@@ -1,7 +1,0 @@
-#include <stdio.h>
-#include "t.h"
-
-void hello(void)
-{
-	printf("hello\n");
-}
