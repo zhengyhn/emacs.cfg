@@ -1,5 +1,3 @@
-;the configuration for display
-
 (setq inhibit-startup-screen t)    ;don't show welcome buffer
 
 (fset 'yes-or-no-p 'y-or-n-p)      ;y or n instead of yes or no
@@ -9,7 +7,7 @@
 
 (setq x-select-enable-clipboard t) ;share clipboard
 
-(setq-default cursor-type 'bar)    ;cursor type as |
+;(setq-default cursor-type 'bar)    ;cursor type as |
 (global-hl-line-mode t)            ;highlight the current line
 
 (tool-bar-mode -1)
@@ -47,13 +45,14 @@
 (global-set-key [C-S-iso-lefttab] 'tabbar-backward)
 ;;=====================================================================
 
-;encoding
+;;encoding
 (load-file "~/.emacs.d/plugins/unicad.el")
 (require 'unicad)
 
-;all *~ files in one place
+;;all *~ files in one place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))     
 
+;;font
 (set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
 
 ;;============
@@ -72,6 +71,35 @@
 
 ;;=========
 ;;user info
-;;=====================
+;;=============================================
 (setq user-full-name "yuanhang zheng"
 	  user-mail-address "zhengyhn@gmail.com")
+;;=============================================
+
+;;=============
+;;key bindings
+;;=========================================================================
+(global-set-key (kbd "C-SPC") nil)          ;disable for fcitx input method
+
+(global-set-key (kbd "C-c t") 'shell)       ;start shell,'t' for terminal
+
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)   ;ctrl+mouse change
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)   ;font size
+
+(global-set-key (kbd "C-c i") 'image-dired)   ;for image view
+
+(global-set-key "\C-L" 'forward-char)     ;origin is clear to center
+(global-set-key "\C-H" 'backward-char)    ;origin is help
+;(global-set-key "\C-M" 'backward-delete-char)   ;origin is RET
+(global-set-key (kbd "RET") 'newline-and-indent)   ;for indent
+
+(global-set-key (kbd "M-c")                   ;orgin is captilize
+				(lambda ()
+				  "copy a line"
+				  (interactive)
+				  (kill-line)
+				  (defvar r nil)
+				  (point-to-register r)   ;copy current point to register
+				  (yank)
+				  (jump-to-register r)))  ;jump to the point
+;;==========================================================================

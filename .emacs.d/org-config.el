@@ -6,6 +6,7 @@
 ;;key bindings
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "S-TAB") 'pcomplete)
 ;; todo list
 (setq org-todo-keywords
 	  '((sequence "TODO(t)" "DOING(i!)" "HANGUP(h!)" "|"
