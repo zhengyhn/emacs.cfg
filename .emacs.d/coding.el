@@ -60,7 +60,9 @@
 (require 'haskell-mode)
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;smart complie
 (load-file "~/.emacs.d/plugins/smart-compile.el")
@@ -78,9 +80,9 @@
 			  '(ielm)))
 
 ;;srSpeedbar
-;; (load-file (concat plugins-path "sr-speedbar.el"))
-;; (require 'sr-speedbar)
-;; (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
+(load-file (concat plugins-path "sr-speedbar.el"))
+(require 'sr-speedbar)
+(global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
 
 ;;yaSnippet
 (add-to-list 'load-path (concat plugins-path "yasnippet"))
@@ -110,7 +112,7 @@
   (interactive)
   (transpose-lines 1)
   (forward-line -2))
-(global-set-key [(shift up)] 'move-line-up)
+(global-set-key (kbd "M-P") 'move-line-up)
 
 (defun move-line-down ()
   "move down the current line"
@@ -118,7 +120,7 @@
   (forward-line 1)
   (transpose-lines 1)
   (forward-line -1))
-(global-set-key [(shift down)] 'move-line-down)
+(global-set-key (kbd "M-N") 'move-line-down)
 
 (defun indent-region-or-buffer ()
   "indent a region if selected or the whole buffer"

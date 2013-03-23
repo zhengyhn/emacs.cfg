@@ -36,7 +36,10 @@
 ;(load-theme 'wheatgrass)
 ;(load-theme 'whiteboard)
 ;(load-theme 'wombat)
-;;=====================================================
+;(load-file (concat plugins-path "color-theme.el"))
+;(require 'color-theme)
+;(load-file (concat conf-path "my-theme.el"))
+;(my-theme)
 
 ;;tabbar-ruler
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
@@ -59,7 +62,7 @@
 	  `((".*" ,temporary-file-directory t)))
 
 (global-reveal-mode t)
-(electric-pair-mode t)
+;(electric-pair-mode t)
 (show-paren-mode +1)
 (setq show-paren-style 'parenthesis)
 (icomplete-mode +1)
@@ -100,11 +103,11 @@
 				(lambda ()
 				  "copy a line"
 				  (interactive)
-				  (kill-line)
-				  (defvar r nil)
-				  (point-to-register r)   ;copy current point to register
-				  (yank)
-				  (jump-to-register r)))  ;jump to the point
+				  (kill-ring-save (point) (line-end-position))
+				  (message "copy a line!")))
+;				  (defvar r nil)))
+;				  (point-to-register r)   ;copy current point to register
+;				  (jump-to-register r)))  ;jump to the point
 
 
 ;;; ui.el ends here

@@ -28,6 +28,10 @@
    (sql . t)
    (haskell . t)
    (python . t)))
+(setq org-export-default-language "zh-CN")
+(add-hook 'org-mode-hook
+		  (lambda ()
+			(setq truncate-liness nil)))
 
 ;;weibo
 (add-to-list 'load-path (concat plugins-path "weibo"))
@@ -39,7 +43,6 @@
 (require 'jabber-autoloads)
 (setq jabber-account-list
 	  '(("zhengyhn@gmail.com"
-		(:password . " mvfcbuvemzqlcead ") 
 		(:network-server . "talk.google.com")
 		(:connection-type . ssl))))
 (global-set-key (kbd "C-c j c") 'jabber-connect-all)
@@ -87,11 +90,21 @@
    (concat
 	"http://www.google.com/search?ie=utf-8&oe=utf-8&q="
 	(url-hexify-string (if mark-active
-						   (buffer-substring (region-beginning (region-end)))
+						   (buffer-substring (region-beginning) (region-end))
 						 (read-string "google: "))))))
 (global-set-key (kbd "C-c g") 'google)
 
-
+;;youdao
+(defun youdao ()
+  "search a word in youdao dictionary"
+  (interactive)
+  (browse-url
+   (concat
+	"http://dict.youdao.com/search?le=eng&keyfrom=dict.index&q="
+	(url-hexify-string (if mark-active
+						   (buffer-substring (region-beginning) (region-end))
+						 (read-string "youdao: "))))))
+(global-set-key (kbd "C-c y") 'youdao)
 
 ;;; life.el ends here
 
