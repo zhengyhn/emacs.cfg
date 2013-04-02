@@ -95,16 +95,18 @@
 (global-set-key (kbd "C-c g") 'google)
 
 ;;youdao
-(defun youdao ()
-  "search a word in youdao dictionary"
-  (interactive)
-  (browse-url
-   (concat
-	"http://dict.youdao.com/search?le=eng&keyfrom=dict.index&q="
-	(url-hexify-string (if mark-active
-						   (buffer-substring (region-beginning) (region-end))
-						 (read-string "youdao: "))))))
-(global-set-key (kbd "C-c y") 'youdao)
+;; (defun youdao ()
+;;   "search a word in youdao dictionary"
+;;   (interactive)
+;;   (browse-url
+;;    (concat
+;; 	"http://dict.youdao.com/search?le=eng&keyfrom=dict.index&q="
+;; 	(url-hexify-string (if mark-active
+;; 						   (buffer-substring (region-beginning) (region-end))
+;; 						 (read-string "youdao: "))))))
+;; (global-set-key (kbd "C-c y") 'youdao)
 
+(load-file (concat plugins-path "youdao-dict/youdao-dict.el"))
+(require 'youdao-dict-query)
 ;;; life.el ends here
 
