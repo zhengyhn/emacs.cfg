@@ -103,7 +103,8 @@
 (global-set-key (kbd "C-c g") 'google)
 
 (add-to-list 'load-path (concat plugins-path "youdao-dict"))
-(autoload 'youdao-dict-query "youdao-dict")
+(autoload 'youdao-dict "youdao-dict")
+(global-set-key (kbd "C-c y") 'youdao-dict)
 
 ;;; life.el ends here
 
