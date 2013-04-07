@@ -8,7 +8,7 @@
 ;;; code
 
 ;;require
-(load-file (concat plugins-path "dash.el"))
+;(load-file (concat plugins-path "dash.el"))
 (require 'dash)
 
 ;;comment
@@ -16,9 +16,9 @@
 (global-set-key (kbd "M-'") 'uncomment-region)
 
 ;code style
-(load-file (concat plugins-path "guess-offset.el"))
+;(load-file (concat plugins-path "guess-offset.el"))
 (require 'guess-offset)
-(load-file (concat plugins-path "smart-tab.el"))
+;(load-file (concat plugins-path "smart-tab.el"))
 
 ;c
 (eval-after-load 'cc-mode
@@ -26,7 +26,7 @@
 	 (setq c-default-style
 		'((c-mode . "k&r")))
 	 ;;cscope
-	 (load-file (concat plugins-path "xcscope.el"))
+;	 (load-file (concat plugins-path "xcscope.el"))
 	 (require 'xcscope)
 	 (global-set-key (kbd "C-'") 'cscope-find-global-definition-no-prompting)
 	 (global-set-key (kbd "C-;") 'cscope-pop-mark)
@@ -39,13 +39,13 @@
 ;======================================================
 
 ;;php-mode
-(load-file (concat plugins-path "php-mode.el"))
-(require 'php-mode)
+;(load-file (concat plugins-path "php-mode.el"))
+(autoload 'php-mode "php-mode")
 
 ;;css-mode
 (eval-after-load 'css-mode
   '(progn
-	 (load-file (concat plugins-path "rainbow-mode.el"))
+;	 (load-file (concat plugins-path "rainbow-mode.el"))
 	 (require 'rainbow-mode)
 
 	 (defun css-mode-defaults ()
@@ -57,7 +57,7 @@
 
 ;;haskell
 (add-to-list 'load-path (concat plugins-path "haskell-mode"))
-(require 'haskell-mode)
+(autoload 'haskell-mode "haskell-mode")
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
@@ -65,7 +65,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;smart complie
-(load-file "~/.emacs.d/plugins/smart-compile.el")
+(autoload 'smart-compile "~/.emacs.d/plugins/smart-compile.el")
 (global-set-key [f9] 'smart-compile)
 (global-set-key [f10] 'gdb)
 
@@ -80,8 +80,8 @@
 			  '(ielm)))
 
 ;;srSpeedbar
-(load-file (concat plugins-path "sr-speedbar.el"))
-(require 'sr-speedbar)
+;(load-file (concat plugins-path "sr-speedbar.el"))
+(autoload 'sr-speedbar-toggle "sr-speedbar")
 (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
 
 ;;yaSnippet
@@ -179,7 +179,7 @@
 	(when filename
 	  (delete-file filename)
 	  (message "file '%s' has been deleted!" filename)))
-  (kill-buffer))
+  (kill-buffer)) 
 (global-set-key (kbd "C-c DEL") 'delete-file-and-buffer)
 
 

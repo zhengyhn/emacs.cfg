@@ -102,7 +102,7 @@
 						(if form-content form-content)
 						(if sen-content sen-content)))))
 	
-(defun youdao-dict-query ()
+(defun youdao-dict ()
   "Query a word from youdao online dictionaries and show it."
   (interactive)
   (let (word-to-query xml-result)
@@ -115,6 +115,6 @@
   (pos-tip-show (youdao-dict-parse-xml xml-result) '("black" . "white"))))
 
 (global-set-key (kbd "C-c y") 'youdao-dict-query)
-(provide 'youdao-dict-query)
+(provide 'youdao-dict)
 
 ;;; youdao.el ends here

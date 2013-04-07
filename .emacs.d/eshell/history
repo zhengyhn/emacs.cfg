@@ -1,82 +1,3 @@
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./t
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-./prime 
-ls
-cd algorithm/
-ls
-cd sicily/
-ls
-mkdir 1203
-ls
-cd 1203/
-ls
-./1203 
-./1203
-./1203
-./1203 
-./1203 
-./1203 
-./1203
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-./1203 
-cd
-cd note/
-ls
-mkdir sicicly
-ls
-ls
-cd
-cd note/
-ls
-mkdir multi-core
-cd multi-core/
-ls
-./main 
-python
-ls
 less test.pyc
 ls
 python
@@ -126,3 +47,82 @@ python
 ./7
 python
 python
+ls
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+java PingPong
+ls
+./test 
+ls
+git pull duxing master
+cd
+cd Dropbox/
+ls
+cd
+cd .dropbox-dist/
+ls
+./dropboxd&
+cd
+ls
+cd public_html/duxing/
+ls
+git pull duxing 
+git pull duxing master
+git add -A
+git commit -a -m "check_in"
+git pull duxing master
+git commit -m "solved conflict"
+git commit -a -m "solved conflict"
+git pull duxing master
+git push duxing master
+b
+cd ..
+ls
+git commit -a -m "finish check in"
+git add -A
+git commit -a -m "finish check in"
+git push duxing master
+git pull duxing master
+git add -A
+git commit -a -m "finish comment, no test"
+git push duxing master

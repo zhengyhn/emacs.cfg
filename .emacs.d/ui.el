@@ -52,7 +52,7 @@
 (global-set-key [C-S-iso-lefttab] 'tabbar-backward)
 
 ;;encoding
-(load-file "~/.emacs.d/plugins/unicad.el")
+;(load-file "~/.emacs.d/plugins/unicad.el")
 (require 'unicad)
 
 ;;all *~ files in one place
@@ -105,9 +105,5 @@
 				  (interactive)
 				  (kill-ring-save (point) (line-end-position))
 				  (message "copy a line!")))
-;				  (defvar r nil)))
-;				  (point-to-register r)   ;copy current point to register
-;				  (jump-to-register r)))  ;jump to the point
-
 
 ;;; ui.el ends here
