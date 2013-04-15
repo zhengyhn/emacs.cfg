@@ -12,8 +12,8 @@
 (require 'dash)
 
 ;;comment
-(global-set-key (kbd "M-;") 'comment-region)
-(global-set-key (kbd "M-'") 'uncomment-region)
+(global-set-key (kbd "M-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "M-'") 'comment-box) 
 
 ;code style
 ;(load-file (concat plugins-path "guess-offset.el"))

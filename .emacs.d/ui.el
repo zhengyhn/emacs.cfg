@@ -7,6 +7,8 @@
 
 ;;; code
 
+(setq frame-title-format "%F - %f")
+
 (setq inhibit-startup-screen t)    ;don't show welcome buffer
 (tool-bar-mode -1)
 (menu-bar-mode -1)                 ;disable toolbar,menubar and scrollbar
@@ -21,6 +23,7 @@
 
 (global-hl-line-mode t)            ;highlight the current line
 (blink-cursor-mode -1)
+(global-font-lock-mode t)
 
 ;;theme
 (load-theme 'dichromacy t)         ;select the theme
@@ -99,11 +102,20 @@
 (global-set-key "\C-H" 'backward-char)    ;origin is help
 (global-set-key (kbd "RET") 'newline-and-indent)   ;for indent
 
-(global-set-key (kbd "M-c")                   ;orgin is captilize
-				(lambda ()
-				  "copy a line"
-				  (interactive)
-				  (kill-ring-save (point) (line-end-position))
-				  (message "copy a line!")))
+(defun copy-a-line ()
+  "copy a line"
+  (interactive)
+  (kill-ring-save (point) (line-end-position))
+  (message "copy a line!"))
+(global-set-key (kbd "M-c") 'copy-a-line)            ;orgin is captilize
+
+(defun go-to-char (n char)
+  "Move forward to Nth occurence of CHAR"
+  (interactive "p\ncGo to char: ")
+  (search-forward (string char) nil nil n)
+  (while (char-equal (read-char) char)
+    (search-forward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
+(global-set-key (kbd "C-c f") 'go-to-char)
 
 ;;; ui.el ends here
