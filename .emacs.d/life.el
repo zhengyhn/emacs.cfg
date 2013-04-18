@@ -48,7 +48,6 @@
   '(progn
 	 (setq jabber-account-list
 		   '(("zhengyhn@gmail.com"
-			  (:password . " mvfcbuvemzqlcead ")
 			  (:network-server . "talk.google.com")
 			  (:connection-type . ssl))))
 	 (global-set-key

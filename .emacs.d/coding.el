@@ -11,6 +11,10 @@
 ;(load-file (concat plugins-path "dash.el"))
 (require 'dash)
 
+;; ido-mode
+(require 'ido)
+(ido-mode t)
+
 ;;comment
 (global-set-key (kbd "M-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "M-'") 'comment-box) 
@@ -64,6 +68,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
+(autoload 'lua-mode "lua-mode")
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+	     
 ;smart complie
 (autoload 'smart-compile "~/.emacs.d/plugins/smart-compile.el")
 (global-set-key [f9] 'smart-compile)

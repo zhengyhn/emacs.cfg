@@ -1,0 +1,4 @@
+# name: (user's name)
+# key: user
+# --
+`(replace-regexp-in-string user-full-name)`
