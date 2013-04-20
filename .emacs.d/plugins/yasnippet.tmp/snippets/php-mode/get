@@ -1,8 +1,0 @@
-# name: getXXX()
-# key: get
-# --
-function get$1()
-{
-    return $2;
-}
-$0

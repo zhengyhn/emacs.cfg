@@ -45,6 +45,7 @@
 ;;php-mode
 ;(load-file (concat plugins-path "php-mode.el"))
 (autoload 'php-mode "php-mode")
+(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
 ;;css-mode
 (eval-after-load 'css-mode
