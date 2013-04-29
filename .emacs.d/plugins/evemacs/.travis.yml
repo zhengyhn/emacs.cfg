@@ -1,0 +1,7 @@
+notifications:
+  recipients:
+    - yhsr04hrk@gmail.com
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0

@@ -134,5 +134,10 @@
   (shell-command "~/script/fmc end"))
 (global-set-key (kbd "C-c m q") 'fmc-quit)
 
+;; evernote
+(add-to-list 'load-path (concat plugins-path "evemacs"))
+(autoload 'evemacs-send-message "evemacs")
+(global-set-key (kbd "C-c n s") 'evemacs-send-message)
+
 ;;; life.el ends here
 

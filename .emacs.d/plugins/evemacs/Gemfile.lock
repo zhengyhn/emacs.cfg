@@ -1,0 +1,35 @@
+PATH
+  remote: .
+  specs:
+    evemacs (0.0.1)
+      evernote_oauth
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    evernote-thrift (1.23.2)
+    evernote_oauth (0.2.1)
+      evernote-thrift
+      oauth (>= 0.4.1)
+    oauth (0.4.7)
+    rake (10.0.4)
+    rr (1.0.5)
+    test-unit (2.5.4)
+    test-unit-notify (1.0.1)
+      test-unit (>= 2.4.9)
+    test-unit-rr (1.0.2)
+      rr (>= 1.0.2)
+      test-unit (>= 2.5.2)
+    yard (0.8.6.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler
+  evemacs!
+  rake
+  test-unit
+  test-unit-notify
+  test-unit-rr
+  yard
