@@ -24,12 +24,13 @@
 	 (org-babel-do-load-languages
 	  'org-babel-load-languages
 	  '((C . t)
-		(java . t)
-		(sh . t)
-		(js . t)
-		(sql . t)
-		(haskell . t)
-		(python . t)))
+	    (C++ . t)
+	    (java . t)
+	    (sh . t)
+	    (js . t)
+	    (sql . t)
+	    (haskell . t)
+	    (python . t)))
 	 (setq org-export-default-language "zh-CN")
 	 (add-hook 'org-mode-hook
 			   (lambda ()
@@ -48,6 +49,7 @@
   '(progn
 	 (setq jabber-account-list
 		   '(("zhengyhn@gmail.com"
+			  (:password . " mvfcbuvemzqlcead ")
 			  (:network-server . "talk.google.com")
 			  (:connection-type . ssl))))
 	 (global-set-key
