@@ -8,19 +8,16 @@
 ;;; code
 
 ;;for goagent
-					;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
+;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
 
-;;org-mode
+;; org-mode
 (add-to-list 'load-path (concat plugins-path "org-mode/lisp"))
 (add-to-list 'load-path (concat plugins-path "org-mode/contrib/lisp") t)
 (eval-after-load "org-mode"
   '(progn
-					; key bindings
      (global-set-key (kbd "S-TAB") 'pcomplete)
-					; todo list
      (setq org-todo-keywords
 	   '((sequence "TODO(t)" "DOING(i!)" "DONE(d!)")))
-					; code language
      (org-babel-do-load-languages
       'org-babel-load-languages
       '((C . t)
@@ -36,12 +33,12 @@
 	       (lambda ()
 		 (setq truncate-liness nil)))))
 
-;;weibo
+;; weibo
 (add-to-list 'load-path (concat plugins-path "weibo"))
 (autoload 'weibo-timeline "weibo")
 (global-set-key (kbd "C-c w") 'weibo-timeline)
 
-;;jabber-mode
+;; jabber-mode
 (add-to-list 'load-path (concat plugins-path "emacs-jabber-0.8.91"))
 (require 'jabber-autoloads)
 (global-set-key (kbd "C-c j c") 'jabber-connect-all)
@@ -59,12 +56,11 @@
 			 (jabber-display-roster)
 			 (switch-to-buffer "*-jabber-roster-*")))))
 
-;;stardict
-					;(load-file (concat plugins-path "sdcv-mode.el"))
+;; stardict
 (autoload 'sdcv-search "sdcv-mode")
 (global-set-key (kbd "C-c d") 'sdcv-search)
 
-;;emms
+;; emms
 (add-to-list 'load-path (concat plugins-path "emms-3.0"))
 (global-set-key (kbd "C-c e g") 'emms-play-directory)    ;go
 (autoload 'emms-play-directory "emms-setup")
@@ -91,48 +87,14 @@
      (global-set-key (kbd "C-c e d") 'emms-play-dired)
      (global-set-key (kbd "C-c e x") 'emms-start)))
 
-;;google
-(defun google ()
-  "google a query or a region"
-  (interactive)
-  (browse-url
-   (concat
-    "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
-    (url-hexify-string (if mark-active
-			   (buffer-substring (region-beginning) (region-end))
-			 (read-string "google: "))))))
-(global-set-key (kbd "C-c g") 'google)
-
+;; youdao dictionary
 (add-to-list 'load-path (concat plugins-path "youdao-dict"))
 (autoload 'youdao-dict "youdao-dict")
 (global-set-key (kbd "C-c y") 'youdao-dict)
 
 ;; douban fm
-(defun fmc-play ()
-  "if not start, start fmd and play, else, pause"
-  (interactive)
-  (if (equal (shell-command-to-string "ps -e | grep fmd") "")
-      (shell-command "~/git/fmd"))
-  (shell-command "~/script/fmc toggle"))
+(autoload 'fmc-play "douban-fm")
 (global-set-key (kbd "C-c m p") 'fmc-play)
-
-(defun fmc-next ()
-  "play next song"
-  (interactive)
-  (shell-command "~/script/fmc skip"))
-(global-set-key (kbd "C-c m n") 'fmc-next)
-
-(defun fmc-favor ()
-  "mark the current song as favor"
-  (interactive)
-  (shell-command "~/script/fmc rate"))
-(global-set-key (kbd "C-c m f") 'fmc-favor)
-
-(defun fmc-quit ()
-  "quit the douban fm client and daemon"
-  (interactive)
-  (shell-command "~/script/fmc end"))
-(global-set-key (kbd "C-c m q") 'fmc-quit)
 
 ;; evernote
 (add-to-list 'load-path (concat plugins-path "evemacs"))

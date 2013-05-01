@@ -73,17 +73,6 @@
 ;;font
 (set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
 
-;;transparent
-(defun toggle-transparent()
-  "transparent frame or not"
-  (interactive)
-  (if (or
-	   (equal (frame-parameter (selected-frame) 'alpha) nil)
-	   (equal (frame-parameter (selected-frame) 'alpha) '(100 100)))
-	  (set-frame-parameter (selected-frame) 'alpha '(70 50))
-	(set-frame-parameter (selected-frame) 'alpha '(100 100))))
-(global-set-key [(f11)] 'toggle-transparent)
-
 ;;user info
 (setq user-full-name "yuanhang zheng"
 	  user-mail-address "zhengyhn@gmail.com")
@@ -102,26 +91,5 @@
 (global-set-key "\C-H" 'backward-char)    ;origin is help
 (global-set-key (kbd "RET") 'newline-and-indent)   ;for indent
 
-(defun copy-a-line ()
-  "copy a line"
-  (interactive)
-  (kill-ring-save (point) (line-end-position))
-  (message "copy a line!"))
-(global-set-key (kbd "M-c") 'copy-a-line)            ;orgin is captilize
-
-(defun go-to-char (n char)
-  "Move forward to Nth occurence of CHAR"
-  (interactive "p\ncGo to char: ")
-  (search-forward (string char) nil nil n)
-  (while (char-equal (read-char) char)
-    (search-forward (string char) nil nil n))
-  (setq unread-command-events (list last-input-event)))
-(global-set-key (kbd "C-c f") 'go-to-char)
-
-(defun kill-all-buffers ()
-  "kill all of the buffers"
-  (interactive)
-  (mapc 'kill-buffer (buffer-list)))
-(global-set-key (kbd "C-c k") 'kill-all-buffers)
 
 ;;; ui.el ends here

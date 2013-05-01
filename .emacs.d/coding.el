@@ -106,89 +106,41 @@
 ;inc:#include
 ;p:printf
 
-(defun insert-empty-line ()
-  "insert an empty line after the current line"
-  (interactive)
-  (move-end-of-line nil)
-  (open-line 1)
-  (forward-line 1)
-  (indent-according-to-mode))
+(autoload 'insert-empty-line "operation")
 (global-set-key [(shift return)] 'insert-empty-line)
 
-(defun move-line-up ()
-  "move up the current line"
-  (interactive)
-  (transpose-lines 1)
-  (forward-line -2))
+(autoload 'move-line-up "operation")
 (global-set-key (kbd "M-P") 'move-line-up)
 
-(defun move-line-down ()
-  "move down the current line"
-  (interactive)
-  (forward-line 1)
-  (transpose-lines 1)
-  (forward-line -1))
+(autoload 'move-line-down "operation")
 (global-set-key (kbd "M-N") 'move-line-down)
 
-(defun indent-region-or-buffer ()
-  "indent a region if selected or the whole buffer"
-  (interactive)
-  (save-excursion
-	(if (region-active-p)
-		(progn
-		  (indent-region (region-beginning) (region-end))
-		  (message "the selectedd region has been indented!"))
-	  (progn
-		(indent-region (point-min) (point-max))
-		(message "the whole buffer has been indented!")))))
+(autoload 'indent-region-or-buffer "operation")
 (global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
-(defun duplicate-current-line-or-region (count)
-  "duplicates the current line or region COUNT times"
-  (interactive "p")
-  (let (beg end (origin (point)))
-	(if (and mark-active (> (point) (mark)))
-		(exchange-point-and-mark))
-	(setq beg (line-beginning-position))
-	(if mark-active
-		(exchange-point-and-mark))
-	(setq end (line-end-position))
-	(let ((region (buffer-substring-no-properties beg end)))
-	  (-dotimes count
-				(lambda (n)
-				  (goto-char end)
-				  (newline)
-				  (insert region)
-				  (setq end (point))))
-	  (goto-char (+ origin (* (length region) count) count)))))
+(autoload 'duplicate-current-line-or-region "operation")
 (global-set-key (kbd "M-d") 'duplicate-current-line-or-region)
 
-(defun rename-file-and-buffer ()
-  "renames the current buffer and it's file"
-  (interactive)
-  (let ((name (buffer-name))
-		(filename (buffer-file-name)))
-	(if (not (and filename (file-exists-p filename)))
-		(message "buffer '%s' is not visiting a file" name)
-	  (let ((new-name (read-file-name "new name: " filename)))
-		(cond ((get-buffer new-name)
-			   (message "a buffer named '%s' exists!" new-name))
-			  (t
-			   (rename-file name new-name 1)
-			   (rename-buffer new-name)
-			   (set-visited-file-name new-name)
-			   (set-buffer-modified-p nil)))))))
+(autoload 'rename-file-and-buffer "operation")
 (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 
-(defun delete-file-and-buffer ()
-  "kills the current buffer and deletes its file"
-  (interactive)
-  (let ((filename (buffer-file-name)))
-	(when filename
-	  (delete-file filename)
-	  (message "file '%s' has been deleted!" filename)))
-  (kill-buffer)) 
+(autoload 'delete-file-and-buffer "operation")
 (global-set-key (kbd "C-c DEL") 'delete-file-and-buffer)
+
+(autoload 'copy-a-line "operation")
+(global-set-key (kbd "M-c") 'copy-a-line)
+
+(autoload 'go-to-char "operation")
+(global-set-key (kbd "C-c f") 'go-to-char)
+
+(autoload 'kill-all-buffers "operation")
+(global-set-key (kbd "C-c k") 'kill-all-buffers)
+
+(autoload 'toggle-transparent "operation")
+(global-set-key [(f11)] 'toggle-transparent)
+
+(autoload 'google "operation")
+(global-set-key (kbd "C-c g") 'google)
 
 
 ;;; coding.el ends here
