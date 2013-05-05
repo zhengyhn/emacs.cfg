@@ -101,5 +101,9 @@
 (autoload 'evemacs-send-message "evemacs")
 (global-set-key (kbd "C-c n s") 'evemacs-send-message)
 
+;; muse
+(require 'muse-mode)
+(autoload 'muse-html "muse-mode")
+
 ;;; life.el ends here
 
