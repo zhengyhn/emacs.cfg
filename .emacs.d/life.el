@@ -102,8 +102,44 @@
 (global-set-key (kbd "C-c n s") 'evemacs-send-message)
 
 ;; muse
-(require 'muse-mode)
-(autoload 'muse-html "muse-mode")
+;;(require 'muse-mode)
+;;(autoload 'muse-html "muse-mode")
+
+;; mu4e
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(autoload 'mu4e "mu4e")
+(global-set-key (kbd "C-c m") 'mu4e)
+
+(setq mu4e-maildir "~/Maildir")
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+(setq mu4e-sent-messages-behavior 'delete)
+
+(setq mu4e-maildir-shortcuts
+      '( ("/INBOX"               . ?i)
+         ("/[Gmail].Sent Mail"   . ?s)
+         ("/[Gmail].Trash"       . ?t)
+         ("/[Gmail].All Mail"    . ?a)))
+(setq mu4e-get-mail-command "offlineimap")
+
+(setq
+ user-mail-address "zhengyhn@gmail.com"
+ user-full-name  "yuanhang zheng"
+ message-signature
+ (concat
+  "郑远航(yuanhang zheng)\n"
+  "Email: zhengyhn@gmail.com\n"
+  "Blog: www.zhengyuanhang.com\n"))
+
+(autoload 'smtpmail "smtpmail")
+(setq message-send-mail-function 'smtpmail-send-it
+    smtpmail-stream-type 'starttls
+    smtpmail-default-smtp-server "smtp.gmail.com"
+    smtpmail-smtp-server "smtp.gmail.com"
+    smtpmail-smtp-service 587)
+(setq message-kill-buffer-on-exit t)
+
 
 ;;; life.el ends here
 

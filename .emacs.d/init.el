@@ -12,6 +12,7 @@
 (defvar plugins-path (expand-file-name "plugins/" conf-path)
   "plugins' directory")
 
+
 (add-to-list 'load-path conf-path)
 (add-to-list 'load-path plugins-path)
 (load-file (expand-file-name "ui.el" conf-path))
