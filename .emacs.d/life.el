@@ -44,11 +44,14 @@
 (global-set-key (kbd "C-c j c") 'jabber-connect-all)
 (eval-after-load "jabber-autoloads"
   '(progn
+     (require 'netrc)
+     (setq cred (netrc-machine (netrc-parse "~/.authinfo") "jabber" t))
      (setq jabber-account-list
-	   '(("zhengyhn@gmail.com"
-	      (:password . " mvfcbuvemzqlcead ")
+	   `((, (netrc-get cred "login")
+	      (:password . , (netrc-get cred "password"))
 	      (:network-server . "talk.google.com")
-	      (:connection-type . ssl))))
+	      (:connection-type . ssl)
+	      (:port . 5223))))
      (global-set-key
       (kbd "C-c j v") '(lambda ()
 			 "visit jabber roster"
@@ -108,7 +111,7 @@
 ;; mu4e
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (autoload 'mu4e "mu4e")
-(global-set-key (kbd "C-c m") 'mu4e)
+(global-set-key (kbd "C-x m") 'mu4e)
 
 (setq mu4e-maildir "~/Maildir")
 (setq mu4e-drafts-folder "/[Gmail].Drafts")
@@ -140,6 +143,21 @@
     smtpmail-smtp-service 587)
 (setq message-kill-buffer-on-exit t)
 
+;; for attachment
+;; M-x dired, mark the file(s), and C-c RET C-a
+(autoload 'gnus-dired "gnus-dired")
+(defun gnus-dired-mail-buffers ()
+  "Return a list of active message buffers"
+  (let (buffers)
+    (save-current-buffer
+      (dolist (buffer (buffer-list t))
+	(set-buffer buffer)
+	(when (add (derived-mode-p 'message-mode)
+		   (null message-sent-message-via))
+	  (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+(setq gnus-dired-mail-mode 'mu4e-user-agent)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;;; life.el ends here
 
