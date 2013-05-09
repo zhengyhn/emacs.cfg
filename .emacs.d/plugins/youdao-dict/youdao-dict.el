@@ -8,7 +8,7 @@
 ;; URL: https://github.com/itlodge/youdao-dict
 
 (load-file (concat (file-name-directory load-file-name) "pos-tip-0.4.5.el"))
-(require 'pos-tip)
+(require 'popup)
 
 (defconst SEARCH-URL "'http://dict.youdao.com/search?le=eng&keyfrom=dict.index&xmlDetail=true&doctype=xml&q=%s'")
 (defconst SEARCH-PROMPT "Youdao for (default %s): ")
@@ -112,7 +112,7 @@
 			      (format SEARCH-URL
 				      (url-hexify-string word-to-query))
 			      " 2> /dev/null")))
-    (pos-tip-show (youdao-dict-parse-xml xml-result) '("black" . "gray"))))
+    (popup-tip (youdao-dict-parse-xml xml-result))))
 
 (provide 'youdao-dict)
 
