@@ -8,7 +8,7 @@
 ;;; code
 
 ;;for goagent
-;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
+					;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
 
 ;; org-mode
 (add-to-list 'load-path (concat plugins-path "org-mode/lisp"))
@@ -48,10 +48,10 @@
      (setq cred (netrc-machine (netrc-parse "~/.authinfo") "jabber" t))
      (setq jabber-account-list
 	   `((, (netrc-get cred "login")
-	      (:password . , (netrc-get cred "password"))
-	      (:network-server . "talk.google.com")
-	      (:connection-type . ssl)
-	      (:port . 5223))))
+		(:password . , (netrc-get cred "password"))
+		(:network-server . "talk.google.com")
+		(:connection-type . ssl)
+		(:port . 5223))))
      (global-set-key
       (kbd "C-c j v") '(lambda ()
 			 "visit jabber roster"
@@ -113,51 +113,53 @@
 (autoload 'mu4e "mu4e")
 (global-set-key (kbd "C-x m") 'mu4e)
 
-(setq mu4e-maildir "~/Maildir")
-(setq mu4e-drafts-folder "/[Gmail].Drafts")
-(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-(setq mu4e-trash-folder  "/[Gmail].Trash")
-(setq mu4e-sent-messages-behavior 'delete)
+(eval-after-load 'mu4e
+  '(progn
+     (setq mu4e-maildir "~/Maildir")
+     (setq mu4e-drafts-folder "/[Gmail].Drafts")
+     (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+     (setq mu4e-trash-folder  "/[Gmail].Trash")
+     (setq mu4e-sent-messages-behavior 'delete)
 
-(setq mu4e-maildir-shortcuts
-      '( ("/INBOX"               . ?i)
-         ("/[Gmail].Sent Mail"   . ?s)
-         ("/[Gmail].Trash"       . ?t)
-         ("/[Gmail].All Mail"    . ?a)))
-(setq mu4e-get-mail-command "offlineimap")
+     (setq mu4e-maildir-shortcuts
+	   '( ("/INBOX"               . ?i)
+	      ("/[Gmail].Sent Mail"   . ?s)
+	      ("/[Gmail].Trash"       . ?t)
+	      ("/[Gmail].All Mail"    . ?a)))
+     (setq mu4e-get-mail-command "offlineimap")
 
-(setq
- user-mail-address "zhengyhn@gmail.com"
- user-full-name  "yuanhang zheng"
- message-signature
- (concat
-  "郑远航(yuanhang zheng)\n"
-  "Email: zhengyhn@gmail.com\n"
-  "Blog: www.zhengyuanhang.com\n"))
+     (setq
+      user-mail-address "zhengyhn@gmail.com"
+      user-full-name  "yuanhang zheng"
+      message-signature
+      (concat
+       "郑远航(yuanhang zheng)\n"
+       "Email: zhengyhn@gmail.com\n"
+       "Blog: www.zhengyuanhang.com\n"))
+     (require 'smtpmail)
+     (setq message-send-mail-function 'smtpmail-send-it
+	   smtpmail-stream-type 'starttls
+	   smtpmail-default-smtp-server "smtp.gmail.com"
+	   smtpmail-smtp-server "smtp.gmail.com"
+	   smtpmail-smtp-service 587)
+     (setq message-kill-buffer-on-exit t)
 
-(autoload 'smtpmail "smtpmail")
-(setq message-send-mail-function 'smtpmail-send-it
-    smtpmail-stream-type 'starttls
-    smtpmail-default-smtp-server "smtp.gmail.com"
-    smtpmail-smtp-server "smtp.gmail.com"
-    smtpmail-smtp-service 587)
-(setq message-kill-buffer-on-exit t)
+     ;; for attachment
+     ;; M-x dired, mark the file(s), and C-c RET C-a
+     (require 'gnus-dired)
+     (defun gnus-dired-mail-buffers ()
+       "Return a list of active message buffers"
+       (let (buffers)
+	 (save-current-buffer
+	   (dolist (buffer (buffer-list t))
+	     (set-buffer buffer)
+	     (when (add (derived-mode-p 'message-mode)
+			(null message-sent-message-via))
+	       (push (buffer-name buffer) buffers))))
+	 (nreverse buffers)))
+     (setq gnus-dired-mail-mode 'mu4e-user-agent)
+     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)))
 
-;; for attachment
-;; M-x dired, mark the file(s), and C-c RET C-a
-(autoload 'gnus-dired "gnus-dired")
-(defun gnus-dired-mail-buffers ()
-  "Return a list of active message buffers"
-  (let (buffers)
-    (save-current-buffer
-      (dolist (buffer (buffer-list t))
-	(set-buffer buffer)
-	(when (add (derived-mode-p 'message-mode)
-		   (null message-sent-message-via))
-	  (push (buffer-name buffer) buffers))))
-    (nreverse buffers)))
-(setq gnus-dired-mail-mode 'mu4e-user-agent)
-(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;;; life.el ends here
 

@@ -7,7 +7,6 @@
 ;; Created: Sun Mar 31 12:36:27 2013
 ;; URL: https://github.com/itlodge/youdao-dict
 
-(load-file (concat (file-name-directory load-file-name) "pos-tip-0.4.5.el"))
 (require 'popup)
 
 (defconst SEARCH-URL "'http://dict.youdao.com/search?le=eng&keyfrom=dict.index&xmlDetail=true&doctype=xml&q=%s'")

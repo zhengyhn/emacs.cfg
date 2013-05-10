@@ -7,9 +7,6 @@
 
 ;;; code
 
-;;require
-(require 'dash)
-
 ;; ido-mode
 (require 'ido)
 (ido-mode t)
@@ -67,11 +64,13 @@
 
 ;; haskell
 (add-to-list 'load-path (concat plugins-path "haskell-mode"))
-(autoload 'haskell-mode "haskell-mode")
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(autoload 'haskell-mode "haskell-mode")
+(eval-after-load 'haskell-mode
+  '(progn
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)))
 
 (autoload 'lua-mode "lua-mode")
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))

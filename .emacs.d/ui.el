@@ -47,9 +47,9 @@
 ;;tabbar-ruler
 (add-to-list 'load-path "~/.emacs.d/plugins/tabbar")
 (require 'tabbar)
-					;(setq tabbar-ruler-global-tabbar 't)
-					;(setq tabbar-ruler-global-ruler 't)
-					;(require 'tabbar-ruler)
+;;(setq tabbar-ruler-global-tabbar 't)
+;;(setq tabbar-ruler-global-ruler 't)
+;;(require 'tabbar-ruler)
 (tabbar-mode t)
 (global-set-key [C-tab] 'tabbar-forward)             ;;switch tabbar
 (global-set-key [C-S-iso-lefttab] 'tabbar-backward)
@@ -80,14 +80,18 @@
 (global-set-key (kbd "C-SPC") nil)          ;;disable for fcitx input method
 
 (global-set-key (kbd "C-c t") 'shell)       ;;start shell,'t' for terminal
-;; With this, we can open more than one buffer for shell
-(defun shell-mode-auto-rename-buffer (text)
-  "Auto rename shell buffer"
-  (if (eq major-mode 'shell-mode)
-      (rename-buffer (concat "shell-" default-directory) t)))
-(add-hook 'comint-output-filter-functions 'shell-mode-auto-rename-buffer)
-(require 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
+(eval-after-load 'shell
+  '(progn
+     (require 'exec-path-from-shell)
+     (exec-path-from-shell-initialize)
+     ;; With this, we can open more than one buffer for shell
+     (defun shell-mode-auto-rename-buffer (text)
+       "Auto rename shell buffer"
+       (if (eq major-mode 'shell-mode)
+	   (rename-buffer (concat "shell-" default-directory) t)))
+     (add-hook 'comint-output-filter-functions
+	       'shell-mode-auto-rename-buffer)))
+
 
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)   ;;ctrl+mouse 
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)   ;;font size

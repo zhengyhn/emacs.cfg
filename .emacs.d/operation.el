@@ -7,6 +7,8 @@
 
 ;;; code
 
+(require 'dash)
+
 (defun insert-empty-line ()
   "insert an empty line after the current line"
   (interactive)
