@@ -101,6 +101,6 @@
 (global-set-key "\C-L" 'forward-char)     ;;origin is clear to center
 (global-set-key "\C-H" 'backward-char)    ;;origin is help
 (global-set-key (kbd "RET") 'newline-and-indent)   ;;for indent
-
+(global-set-key (kbd "<f5>") 'revert-buffer)   ;; reload the file
 
 ;;; ui.el ends here

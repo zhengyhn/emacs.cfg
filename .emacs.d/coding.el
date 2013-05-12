@@ -19,11 +19,11 @@
 (require 'guess-offset)
 ;;(load-file (concat plugins-path "smart-tab.el"))
 
-;; c
-(eval-after-load 'cc-mode
+;; c/c++
+(eval-after-load 'c-mode
   '(progn
      (setq c-default-style
-	   '((c-mode . "k&r")))
+	   '((cc-mode . "k&r")))
 
      (require 'xcscope)
      (global-set-key (kbd "C-'")
@@ -56,7 +56,7 @@
 (eval-after-load 'java-mode
   '(progn
      (defun java-mode-defaults ()
-       (setq java-indent-offset 4))
+       (setq c-basic-offset 4))
      (setq my-java-mode-hook 'java-mode-defaults)
      (add-hook 'java-mode-hook (lambda ()
 				 (run-hooks 'my-java-mode-hook)))))
@@ -90,6 +90,7 @@
       (append ac-modes '(org-mode)
 	      '(ielm)))
 
+;; sr-speedbar
 (autoload 'sr-speedbar-toggle "sr-speedbar")
 (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
 
@@ -106,6 +107,9 @@
 ;;main
 ;;inc:#include
 ;;p:printf
+
+;; look for doc
+(global-set-key (kbd "C-x w") 'woman)
 
 ;; all operation function
 (autoload 'insert-empty-line "operation")

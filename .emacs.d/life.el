@@ -136,6 +136,10 @@
        "郑远航(yuanhang zheng)\n"
        "Email: zhengyhn@gmail.com\n"
        "Blog: www.zhengyuanhang.com\n"))
+
+     (setq mu4e-view-prefer-html t)
+     (setq mu4e-attachment-dir "~/downloads")  ;; A to view attachment
+     
      (require 'smtpmail)
      (setq message-send-mail-function 'smtpmail-send-it
 	   smtpmail-stream-type 'starttls
