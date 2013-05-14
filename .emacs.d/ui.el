@@ -88,7 +88,10 @@
      (defun shell-mode-auto-rename-buffer (text)
        "Auto rename shell buffer"
        (if (eq major-mode 'shell-mode)
-	   (rename-buffer (concat "shell-" default-directory) t)))
+	   (rename-buffer
+	    (concat
+	     "shell-" (car (last (butlast
+			     (split-string default-directory "/"))))) t)))
      (add-hook 'comint-output-filter-functions
 	       'shell-mode-auto-rename-buffer)))
 

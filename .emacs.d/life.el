@@ -138,15 +138,17 @@
        "Blog: www.zhengyuanhang.com\n"))
 
      (setq mu4e-view-prefer-html t)
-     (setq mu4e-attachment-dir "~/downloads")  ;; A to view attachment
-     
-     (require 'smtpmail)
+     (setq mu4e-attachment-dir "~/downloads")))  ;; A to view attachment
+
+(autoload 'smtpmail "smtpmail")
+(eval-after-load 'smtpmail
+  '(progn
      (setq message-send-mail-function 'smtpmail-send-it
 	   smtpmail-stream-type 'starttls
 	   smtpmail-default-smtp-server "smtp.gmail.com"
 	   smtpmail-smtp-server "smtp.gmail.com"
 	   smtpmail-smtp-service 587)
-     (setq message-kill-buffer-on-exit t)
+     (setq message-kill-buffer-on-exit t)))
 
      ;; for attachment
      ;; M-x dired, mark the file(s), and C-c RET C-a
@@ -157,12 +159,13 @@
 	 (save-current-buffer
 	   (dolist (buffer (buffer-list t))
 	     (set-buffer buffer)
-	     (when (add (derived-mode-p 'message-mode)
+	     (when (and (derived-mode-p 'message-mode)
 			(null message-sent-message-via))
 	       (push (buffer-name buffer) buffers))))
 	 (nreverse buffers)))
      (setq gnus-dired-mail-mode 'mu4e-user-agent)
-     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)))
+     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+
 
 
 ;;; life.el ends here
