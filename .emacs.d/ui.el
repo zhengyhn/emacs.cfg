@@ -27,8 +27,8 @@
 
 ;; theme
 ;;(load-theme 'dichromacy t)         ;; select the theme
-(load-theme 'adwaita t)
-;;(load-theme 'deeper-blue)
+;;(load-theme 'adwaita t)
+(load-theme 'deeper-blue)
 ;;(load-theme 'light-blue)
 ;;(load-theme 'manoj-dark)
 ;;(load-theme 'misterioso)
@@ -69,17 +69,31 @@
 (setq show-paren-style 'parenthesis)
 (icomplete-mode +1)
 
-;;font
+;; font
 (set-default-font "-unknown-文泉驿等宽微米黑-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")
 
-;;user info
+;; user info
 (setq user-full-name "yuanhang zheng"
       user-mail-address "zhengyhn@gmail.com")
 
-;;key bindings
+;; key bindings
 (global-set-key (kbd "C-SPC") nil)          ;;disable for fcitx input method
 
-(global-set-key (kbd "C-c t") 'shell)       ;;start shell,'t' for terminal
+(global-set-key (kbd "C-c t") 'eshell)       ;;start eshell,'t' for terminal
+(eval-after-load 'eshell
+  '(progn
+     (require 'exec-path-from-shell)
+     (exec-path-from-shell-initialize)
+     (defun eshell-rename-buffer ()
+       "Rename eshell buffer"
+       (if (eq major-mode 'eshell-mode)
+	   (rename-buffer
+	    (concat
+	     "esh-" (car (last (butlast (split-string
+					 default-directory "/"))))) t)))
+     (add-hook 'eshell-mode-hook 'eshell-rename-buffer)))
+
+;;(global-set-key (kbd "C-c t") 'shell)       ;;start shell,'t' for terminal
 (eval-after-load 'shell
   '(progn
      (require 'exec-path-from-shell)

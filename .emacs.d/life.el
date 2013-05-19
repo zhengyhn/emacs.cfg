@@ -8,7 +8,7 @@
 ;;; code
 
 ;;for goagent
-					;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
+;;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
 
 ;; org-mode
 (add-to-list 'load-path (concat plugins-path "org-mode/lisp"))
@@ -148,8 +148,7 @@
 	   smtpmail-default-smtp-server "smtp.gmail.com"
 	   smtpmail-smtp-server "smtp.gmail.com"
 	   smtpmail-smtp-service 587)
-     (setq message-kill-buffer-on-exit t)))
-
+     (setq message-kill-buffer-on-exit t)
      ;; for attachment
      ;; M-x dired, mark the file(s), and C-c RET C-a
      (require 'gnus-dired)
@@ -164,8 +163,7 @@
 	       (push (buffer-name buffer) buffers))))
 	 (nreverse buffers)))
      (setq gnus-dired-mail-mode 'mu4e-user-agent)
-     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
-
+     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)))
 
 
 ;;; life.el ends here
