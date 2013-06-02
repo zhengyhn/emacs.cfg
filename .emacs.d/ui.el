@@ -16,7 +16,7 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)      ;; y or n instead of yes or no
 (display-time)                     ;; display clock
-(global-linum-mode t)              ;; show line and column number
+;;(global-linum-mode t)              ;; show line and column number
 (setq column-number-mode t)
 
 (setq x-select-enable-clipboard t) ;; share clipboard
@@ -27,8 +27,8 @@
 
 ;; theme
 ;;(load-theme 'dichromacy t)         ;; select the theme
-;;(load-theme 'adwaita t)
-(load-theme 'deeper-blue)
+(load-theme 'adwaita t)
+;;(load-theme 'deeper-blue)
 ;;(load-theme 'light-blue)
 ;;(load-theme 'manoj-dark)
 ;;(load-theme 'misterioso)
@@ -84,6 +84,10 @@
   '(progn
      (require 'exec-path-from-shell)
      (exec-path-from-shell-initialize)
+     (require 'ansi-color)
+     (defun eshell-colorize-buffer ()
+       (ansi-color-apply-on-region (point-min) (point-max)))
+     (add-hook 'eshell-output-filter-functions 'eshell-colorize-buffer)
      (defun eshell-rename-buffer ()
        "Rename eshell buffer"
        (if (eq major-mode 'eshell-mode)
@@ -91,7 +95,7 @@
 	    (concat
 	     "esh-" (car (last (butlast (split-string
 					 default-directory "/"))))) t)))
-     (add-hook 'eshell-mode-hook 'eshell-rename-buffer)))
+     (add-hook 'eshell-output-filter-functions 'eshell-rename-buffer)))
 
 ;;(global-set-key (kbd "C-c t") 'shell)       ;;start shell,'t' for terminal
 (eval-after-load 'shell
@@ -105,7 +109,7 @@
 	   (rename-buffer
 	    (concat
 	     "shell-" (car (last (butlast
-			     (split-string default-directory "/"))))) t)))
+				  (split-string default-directory "/"))))) t)))
      (add-hook 'comint-output-filter-functions
 	       'shell-mode-auto-rename-buffer)))
 

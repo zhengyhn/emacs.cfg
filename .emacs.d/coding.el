@@ -19,11 +19,19 @@
 (require 'guess-offset)
 ;;(load-file (concat plugins-path "smart-tab.el"))
 
+;; asm
+(autoload 'asm86-mode (concat plugins-path "asm86-mode.el"))
+(setq auto-mode-alist
+      (append '(("\\.asm\\'" . asm86-mode) ("\\.inc\\'" . asm86-mode))
+	      auto-mode-alist))
+
+      
 ;; c/c++
-(eval-after-load 'c-mode
+(eval-after-load 'cc-mode
   '(progn
      (setq c-default-style
 	   '((cc-mode . "k&r")))
+     (setq c-basic-offset 4)
 
      (require 'xcscope)
      (global-set-key (kbd "C-'")
@@ -72,8 +80,17 @@
      (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
      (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)))
 
+;; lua
 (autoload 'lua-mode "lua-mode")
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+
+;; rst
+
+;; markdown
+(autoload 'markdown-mode "markdown-mode")
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; smart complie
 (autoload 'smart-compile "~/.emacs.d/plugins/smart-compile.el")

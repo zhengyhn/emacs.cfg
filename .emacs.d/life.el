@@ -139,6 +139,7 @@
 
      (setq mu4e-view-prefer-html t)
      (setq mu4e-attachment-dir "~/downloads")))  ;; A to view attachment
+     (global-set-key (kbd "C-c C-a s") 'mu4e-view-save-attachment)
 
 (autoload 'smtpmail "smtpmail")
 (eval-after-load 'smtpmail
