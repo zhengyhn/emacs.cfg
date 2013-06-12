@@ -20,9 +20,13 @@
 ;;(load-file (concat plugins-path "smart-tab.el"))
 
 ;; asm
-(autoload 'asm86-mode (concat plugins-path "asm86-mode.el"))
+;; (autoload 'asm86-mode (concat plugins-path "asm86-mode.el"))
+;; (setq auto-mode-alist
+;;       (append '(("\\.asm\\'" . asm86-mode) ("\\.inc\\'" . asm86-mode))
+;; 	      auto-mode-alist))
+
 (setq auto-mode-alist
-      (append '(("\\.asm\\'" . asm86-mode) ("\\.inc\\'" . asm86-mode))
+      (append '(("\\.asm\\'" . asm-mode) ("\\.inc\\'" . asm-mode))
 	      auto-mode-alist))
 
       
@@ -61,13 +65,40 @@
 				(run-hooks 'my-css-mode-hook)))))
 
 ;; java-mode
-(eval-after-load 'java-mode
+(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
+(eval-after-load 'cc-mode
   '(progn
      (defun java-mode-defaults ()
        (setq c-basic-offset 4))
      (setq my-java-mode-hook 'java-mode-defaults)
      (add-hook 'java-mode-hook (lambda ()
-				 (run-hooks 'my-java-mode-hook)))))
+				 (run-hooks 'my-java-mode-hook)))
+     (require 'flymake)
+     (defun my-flymake-init ()
+       (list "my-java-flymake-checks"
+	     (list (flymake-init-create-temp-buffer-copy
+		    'flymake-create-temp-with-folder-structure))))
+     (add-to-list 'flymake-allowed-file-name-masks
+		  '("\\.java$" my-flymake-init flymake-simple-cleanup))
+     ;; emacs-eclim
+     (add-to-list 'load-path (concat plugins-path "emacs-eclim"))
+     (require 'eclim)
+     (require 'eclimd)
+     (start-eclimd)
+     (global-eclim-mode)
+     (setq eclim-auto-save t
+	   eclim-executable "/opt/eclipse/eclim"
+	   eclimd-executable "/opt/eclipse/eclimd"
+	   eclimd-wait-for-process t
+	   eclim-use-yasnippet nil
+	   help-at-pt-display-when-idle t
+	   help-at-pt-timer-delay 0.1
+	   ac-delay 0.1)
+     (help-at-pt-set-timer)
+     (require 'auto-complete-config)
+     (ac-config-default)
+     (require 'ac-emacs-eclim-source)
+     (ac-emacs-eclim-config)))
 
 
 ;; haskell
