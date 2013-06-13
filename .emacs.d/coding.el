@@ -115,6 +115,26 @@
 (autoload 'lua-mode "lua-mode")
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
+;; inf-ruby
+(autoload 'run-ruby "inf-ruby")
+(autoload 'inf-ruby-keys "inf-ruby")
+(add-hook 'ruby-mode-hook
+	  '(lambda ()
+	     (inf-ruby-keys)))
+
+;; rails
+(add-to-list 'load-path (concat plugins-path "emacs-rails"))
+(autoload 'ruby-mode "rails")
+
+;; rhtml-mode
+(add-to-list 'load-path (concat plugins-path "rhtml"))
+(autoload 'rhtml-mode "rhtml-mode")
+(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . rhtml-mode))
+
+;; yaml-mode
+(autoload 'yaml-mode "yaml-mode")
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
 ;; rst
 
 ;; markdown
