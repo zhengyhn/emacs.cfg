@@ -29,7 +29,7 @@
       (append '(("\\.asm\\'" . asm-mode) ("\\.inc\\'" . asm-mode))
 	      auto-mode-alist))
 
-      
+
 ;; c/c++
 (eval-after-load 'cc-mode
   '(progn
@@ -64,8 +64,46 @@
      (add-hook 'css-mode-hook (lambda ()
 				(run-hooks 'my-css-mode-hook)))))
 
+;; emacs-eclim
+(defun load-eclim ()
+  "load eclim code"
+  (interactive)
+  (add-to-list 'load-path (concat plugins-path "emacs-eclim"))
+  (require 'eclim)
+  (require 'eclimd)
+  (global-eclim-mode)
+  (setq eclim-auto-save t
+	eclim-executable "/opt/eclipse/eclim"
+	eclimd-executable "/opt/eclipse/eclimd"
+	eclimd-wait-for-process t
+	eclim-use-yasnippet nil
+	help-at-pt-display-when-idle t
+	help-at-pt-timer-delay 0.1
+	ac-delay 0.1)
+  (help-at-pt-set-timer)
+  (require 'auto-complete-config)
+  (ac-config-default)
+  (require 'ac-emacs-eclim-source)
+  (ac-emacs-eclim-config))
+(global-set-key (kbd "C-c C-e l") 'load-eclim)
+(global-set-key (kbd "C-c C-e s") 'start-eclimd)
+(global-set-key (kbd "C-c C-e h")
+		'eclim-java-show-documentation-for-current-element)
+;; (define-key eclim-mode-map (kbd "C-c C-e p c") 'eclim-project-create)
+;; (define-key eclim-mode-map (kbd "C-c C-e f d") 'eclim-java-find-declaration)
+;; (define-key eclim-mode-map (kbd "C-c C-e f r") 'eclim-java-find-references)
+;; (define-key eclim-mode-map (kbd "C-c C-e f t") 'eclim-java-find-type)
+;; (define-key eclim-mode-map (kbd "C-c C-e f f") 'eclim-java-find-generic)
+;; (define-key eclim-mode-map (kbd "C-c C-e r") 'eclim-java-refactor-rename-symbol-at-point)
+;; (define-key eclim-mode-map (kbd "C-c C-e i") 'eclim-java-import-organize)
+;; (define-key eclim-mode-map (kbd "C-c C-e h") 'eclim-java-hierarchy)
+;; (define-key eclim-mode-map (kbd "C-c C-e z") 'eclim-java-implement)
+;; (define-key eclim-mode-map (kbd "C-c C-e d") 'eclim-java-doc-comment)
+;; (define-key eclim-mode-map (kbd "C-c C-e f s") 'eclim-java-format)
+;; (define-key eclim-mode-map (kbd "C-c C-e g") 'eclim-java-generate-getter-and-setter)
+
+
 ;; java-mode
-(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (eval-after-load 'cc-mode
   '(progn
      (defun java-mode-defaults ()
@@ -75,30 +113,12 @@
 				 (run-hooks 'my-java-mode-hook)))
      (require 'flymake)
      (defun my-flymake-init ()
+       "Located in ~/script/"
        (list "my-java-flymake-checks"
 	     (list (flymake-init-create-temp-buffer-copy
 		    'flymake-create-temp-with-folder-structure))))
      (add-to-list 'flymake-allowed-file-name-masks
-		  '("\\.java$" my-flymake-init flymake-simple-cleanup))
-     ;; emacs-eclim
-     (add-to-list 'load-path (concat plugins-path "emacs-eclim"))
-     (require 'eclim)
-     (require 'eclimd)
-     (start-eclimd)
-     (global-eclim-mode)
-     (setq eclim-auto-save t
-	   eclim-executable "/opt/eclipse/eclim"
-	   eclimd-executable "/opt/eclipse/eclimd"
-	   eclimd-wait-for-process t
-	   eclim-use-yasnippet nil
-	   help-at-pt-display-when-idle t
-	   help-at-pt-timer-delay 0.1
-	   ac-delay 0.1)
-     (help-at-pt-set-timer)
-     (require 'auto-complete-config)
-     (ac-config-default)
-     (require 'ac-emacs-eclim-source)
-     (ac-emacs-eclim-config)))
+		  '("\\.java$" my-flymake-init flymake-simple-cleanup))))
 
 
 ;; haskell
