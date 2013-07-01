@@ -5,6 +5,7 @@
 ;; Author: Yuanhang Zheng <zhengyhn@gmail.com>
 ;; Version: 0.1
 ;; Created: Sun Mar 31 12:36:27 2013
+;; Updated: Sun Jun 30 11:52:12 2013
 ;; URL: https://github.com/itlodge/youdao-dict
 
 (require 'popup)
@@ -28,7 +29,7 @@
     (setq word (when (string-match "[ \t]*$" word)
 		 (replace-match "" nil nil word)))
     ;; no punctuation mark
-    (if (string-match "[,<.>/?;:\[{}`~!@#$%^&*()-=+]" word)
+    (if (string-match "[,<.>/?;:\[{}`~!@#$%^&*()=+]" word)
 	(error "Wrong word!"))
     (setq word word)))
 
@@ -47,7 +48,6 @@
     (setq return-phrase (car (last (car (xml-get-children
 					 youdao-dict 'return-phrase)))))
     (when (equal return-phrase nil)
-      (pos-tip-show "Opps!Word not found!" '("red" . "gray"))
       (error "Opps!Word not found!"))
     
     (setq phonetic-symbol (car (last (car (xml-get-children
@@ -56,50 +56,48 @@
     (setq translations (xml-get-children
 			(car (xml-get-children
 			      youdao-dict 'custom-translation)) 'translation))
-    (setq trans-content nil)
+    (setq trans-content '())
     (loop for trans in translations
-	  do (setq trans-content
-		   (concat trans-content
-			   (car (last (car (xml-get-children
-					    trans 'content)))) "\n")))
+	  do (push (car (last (car (xml-get-children
+				    trans 'content))))
+		   trans-content))
     ;; get word forms
     (setq wordforms (xml-get-children
 		     (car (xml-get-children
 			   youdao-dict 'word-forms)) 'word-form))
-    (setq form-content nil)
+    (setq form-content '())
     (loop for wf in wordforms
-	  do (setq form-content
-		   (concat form-content
-			   (car (last (car (xml-get-children wf 'name))))
+	  do (push (concat (car (last (car (xml-get-children wf 'name))))
 			   ": "
-			   (car (last (car (xml-get-children wf 'value))))
-			   "\n")))
+			   (car (last (car (xml-get-children wf 'value)))))
+		   form-content))
+
     ;; get example sentences
     (setq sentences (xml-get-children
 		     (car (xml-get-children
 			   youdao-dict 'example-sentences)) 'sentence-pair))
-    (setq sen-content nil)
+    (setq sen-content '())
     (loop for sen in sentences
-	  do (setq sen-content
-		   (concat sen-content
-			   (car (last (car
-				       (xml-get-children sen 'sentence))))
-			   "\n"
-			   (car (last (car
-				       (xml-get-children
-					sen 'sentence-translation))))
-			   "\n")))
-    ;; drop html tag <b></b>
-    (setq sen-content (replace-regexp-in-string "<b>" "" sen-content))
-    (setq sen-content (replace-regexp-in-string "</b>" "" sen-content))
+	  do (progn
+	       (let* ((sen
+		       (car (last (car (xml-get-children sen 'sentence)))))
+		      (sen (replace-regexp-in-string "<b>" "" sen))
+		      (sen (replace-regexp-in-string "</b>" "" sen)))
+		 (push sen sen-content))
+	       (push
+		(car (last (car (xml-get-children sen 'sentence-translation))))
+		sen-content)))
     
-    (setq result (concat "Query: " (if original-query original-query)  "\n"
-			 "Return: " (if return-phrase return-phrase) "\n"
-			 (if phonetic-symbol
-			     (concat "phonetic: /" phonetic-symbol "/\n"))
-			 (if trans-content trans-content)
-			 (if form-content form-content)
-			 (if sen-content sen-content)))))
+    (setq result
+	  (append
+	   (list
+	    (concat "Query: " (if original-query original-query))
+	    (concat "Return: " (if return-phrase return-phrase))
+	    (if phonetic-symbol
+		(concat "Phonetic: /" phonetic-symbol "/")))
+	   (if trans-content (reverse trans-content))
+	   (if form-content (reverse form-content))
+	   (if sen-content (reverse sen-content))))))
 
 (defun youdao-dict ()
   "Query a word from youdao online dictionaries and show it."
@@ -111,7 +109,8 @@
 			      (format SEARCH-URL
 				      (url-hexify-string word-to-query))
 			      " 2> /dev/null")))
-    (popup-tip (youdao-dict-parse-xml xml-result))))
+    (popup-menu* (youdao-dict-parse-xml xml-result)
+		 :margin t)))
 
 (provide 'youdao-dict)
 

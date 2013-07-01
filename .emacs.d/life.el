@@ -166,6 +166,11 @@
      (setq gnus-dired-mail-mode 'mu4e-user-agent)
      (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)))
 
+;; octopress
+(autoload 'octo-preview "em-octopress")
+(global-set-key (kbd "C-c o p") 'octo-preview)
+(global-set-key (kbd "C-c o n") 'octo-new-post)
+(global-set-key (kbd "C-c o d") 'octo-deploy)
 
 ;;; life.el ends here
 
