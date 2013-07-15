@@ -8,7 +8,9 @@
 ;;; code
 
 ;;for goagent
-;;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
+(setq url-proxy-services '(("http" . "proxy-shz.intel.com:911")
+			   ("socks" . "proxy-shz.intel.com:1080")
+			   ("https" . "proxy-shz.intel.com:911")))
 
 ;; org-mode
 (add-to-list 'load-path (concat plugins-path "org-mode/lisp"))

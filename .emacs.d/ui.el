@@ -77,9 +77,10 @@
       user-mail-address "zhengyhn@gmail.com")
 
 ;; key bindings
-(global-set-key (kbd "C-SPC") nil)          ;;disable for fcitx input method
+(global-set-key (kbd "C-SPC") nil)          ;; disable for fcitx input method
+(global-set-key (kbd "ESC") 'keyboard-quit) ;; ESC is the same as C-g
 
-(global-set-key (kbd "C-c t") 'eshell)       ;;start eshell,'t' for terminal
+(global-set-key (kbd "C-c t") 'eshell)       ;; start eshell,'t' for terminal
 (eval-after-load 'eshell
   '(progn
      (require 'exec-path-from-shell)
