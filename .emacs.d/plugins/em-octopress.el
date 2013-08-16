@@ -52,8 +52,11 @@ cd %s && %s %s'" octo-dir octo-rake what)))
   "Deploy the blog"
   (interactive)
   (octo-generate)
+  (shell-command-to-string
+   (format "cd %s && mkdir -p public/_posts/ && mkdir -p public/me" octo-dir))
   (message "Deploying...")
   (octo-do "deploy")
+  (sleep-for 3)
   (if (not password)
       (setq password (read-passwd "Please input the password: ")))
   (message "Committing the source")

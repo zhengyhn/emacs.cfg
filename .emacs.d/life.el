@@ -8,9 +8,7 @@
 ;;; code
 
 ;;for goagent
-(setq url-proxy-services '(("http" . "proxy-shz.intel.com:911")
-			   ("socks" . "proxy-shz.intel.com:1080")
-			   ("https" . "proxy-shz.intel.com:911")))
+;;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
 
 ;; org-mode
 (add-to-list 'load-path (concat plugins-path "org-mode/lisp"))
@@ -170,6 +168,8 @@
 
 ;; octopress
 (autoload 'octo-preview "em-octopress")
+(autoload 'octo-new-post "em-octopress")
+(global-set-key (kbd "C-c o g") 'octo-generate)
 (global-set-key (kbd "C-c o p") 'octo-preview)
 (global-set-key (kbd "C-c o n") 'octo-new-post)
 (global-set-key (kbd "C-c o d") 'octo-deploy)

@@ -7,8 +7,6 @@
 
 ;;; code
 
-(remove-hook 'find-file-hooks 'vc-find-file-hook)
-
 ;; ido-mode
 (require 'ido)
 (ido-mode t)
@@ -37,13 +35,7 @@
   '(progn
      (setq c-default-style
 	   '((cc-mode . "k&r")))
-     (setq c-basic-offset 4)
-
-     (require 'xcscope)
-     (global-set-key (kbd "C-'")
-		     'cscope-find-global-definition-no-prompting)
-     (global-set-key (kbd "C-;") 'cscope-pop-mark)
-     (setq cscope-display-cscope-buffer nil)))
+     (setq c-basic-offset 4)))
 
 ;;pascal
 ;;(load-file (concat plugins-path "pascal.el"))
@@ -197,6 +189,14 @@
 ;;main
 ;;inc:#include
 ;;p:printf
+
+;; gtags
+(autoload 'gtags-mode "gtags")
+(setq c++-mode-hook
+      '(lambda ()
+	 (gtags-mode 1)))
+(global-set-key (kbd "C-'") 'gtags-find-tags-from-here)
+(global-set-key (kbd "C-;") 'gtags-pop-stack)
 
 ;; look for doc
 (global-set-key (kbd "C-x w") 'woman)

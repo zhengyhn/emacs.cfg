@@ -27,8 +27,8 @@
 
 ;; theme
 ;;(load-theme 'dichromacy t)         ;; select the theme
-(load-theme 'adwaita t)
-;;(load-theme 'deeper-blue)
+;;(load-theme 'adwaita t)
+(load-theme 'deeper-blue)
 ;;(load-theme 'light-blue)
 ;;(load-theme 'manoj-dark)
 ;;(load-theme 'misterioso)
@@ -77,10 +77,9 @@
       user-mail-address "zhengyhn@gmail.com")
 
 ;; key bindings
-(global-set-key (kbd "C-SPC") nil)          ;; disable for fcitx input method
-(global-set-key (kbd "<escape>") 'keyboard-quit) ;; ESC is the same as C-g
+(global-set-key (kbd "C-SPC") nil)          ;;disable for fcitx input method
 
-(global-set-key (kbd "C-c t") 'eshell)       ;; start eshell,'t' for terminal
+(global-set-key (kbd "C-c t") 'eshell)       ;;start eshell,'t' for terminal
 (eval-after-load 'eshell
   '(progn
      (require 'exec-path-from-shell)

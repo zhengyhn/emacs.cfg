@@ -20,6 +20,12 @@
     (progn
       (shell-command "fmc toggle"))))
 
+(defun fmc-info ()
+  "Look for the current song's information"
+  (interactive)
+  (shell-command "fmc info"))
+(global-set-key (kbd "C-c m i") 'fmc-info)
+  
 (defun fmc-next ()
   "play next song"
   (interactive)
