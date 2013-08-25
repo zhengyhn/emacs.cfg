@@ -17,24 +17,25 @@
 
 ;; code style
 (require 'guess-offset)
-;;(load-file (concat plugins-path "smart-tab.el"))
-
+;; (load-file (concat plugins-path "smart-tab.el"))
+(add-hook 'after-save-hook (lambda ()
+                             (untabify (point-min) (point-max))))
 ;; asm
 ;; (autoload 'asm86-mode (concat plugins-path "asm86-mode.el"))
 ;; (setq auto-mode-alist
 ;;       (append '(("\\.asm\\'" . asm86-mode) ("\\.inc\\'" . asm86-mode))
-;; 	      auto-mode-alist))
+;;        auto-mode-alist))
 
 (setq auto-mode-alist
       (append '(("\\.asm\\'" . asm-mode) ("\\.inc\\'" . asm-mode))
-	      auto-mode-alist))
+          auto-mode-alist))
 
 
 ;; c/c++
 (eval-after-load 'cc-mode
   '(progn
      (setq c-default-style
-	   '((cc-mode . "k&r")))
+       '((cc-mode . "k&r")))
      (setq c-basic-offset 4)))
 
 ;;pascal
@@ -56,7 +57,7 @@
        (rainbow-mode +1))
      (setq my-css-mode-hook 'css-mode-defaults)
      (add-hook 'css-mode-hook (lambda ()
-				(run-hooks 'my-css-mode-hook)))))
+                (run-hooks 'my-css-mode-hook)))))
 
 ;; emacs-eclim
 (defun load-eclim ()
@@ -67,13 +68,13 @@
   (require 'eclimd)
   (global-eclim-mode)
   (setq eclim-auto-save t
-	eclim-executable "/opt/eclipse/eclim"
-	eclimd-executable "/opt/eclipse/eclimd"
-	eclimd-wait-for-process t
-	eclim-use-yasnippet nil
-	help-at-pt-display-when-idle t
-	help-at-pt-timer-delay 0.1
-	ac-delay 0.1)
+    eclim-executable "/opt/eclipse/eclim"
+    eclimd-executable "/opt/eclipse/eclimd"
+    eclimd-wait-for-process t
+    eclim-use-yasnippet nil
+    help-at-pt-display-when-idle t
+    help-at-pt-timer-delay 0.1
+    ac-delay 0.1)
   (help-at-pt-set-timer)
   (require 'auto-complete-config)
   (ac-config-default)
@@ -82,7 +83,7 @@
 (global-set-key (kbd "C-c C-e l") 'load-eclim)
 (global-set-key (kbd "C-c C-e s") 'start-eclimd)
 (global-set-key (kbd "C-c C-e h")
-		'eclim-java-show-documentation-for-current-element)
+        'eclim-java-show-documentation-for-current-element)
 ;; (define-key eclim-mode-map (kbd "C-c C-e p c") 'eclim-project-create)
 ;; (define-key eclim-mode-map (kbd "C-c C-e f d") 'eclim-java-find-declaration)
 ;; (define-key eclim-mode-map (kbd "C-c C-e f r") 'eclim-java-find-references)
@@ -104,15 +105,15 @@
        (setq c-basic-offset 4))
      (setq my-java-mode-hook 'java-mode-defaults)
      (add-hook 'java-mode-hook (lambda ()
-				 (run-hooks 'my-java-mode-hook)))
+                 (run-hooks 'my-java-mode-hook)))
      (require 'flymake)
      (defun my-flymake-init ()
        "Located in ~/script/"
        (list "my-java-flymake-checks"
-	     (list (flymake-init-create-temp-buffer-copy
-		    'flymake-create-temp-with-folder-structure))))
+         (list (flymake-init-create-temp-buffer-copy
+            'flymake-create-temp-with-folder-structure))))
      (add-to-list 'flymake-allowed-file-name-masks
-		  '("\\.java$" my-flymake-init flymake-simple-cleanup))))
+          '("\\.java$" my-flymake-init flymake-simple-cleanup))))
 
 
 ;; haskell
@@ -133,8 +134,8 @@
 (autoload 'run-ruby "inf-ruby")
 (autoload 'inf-ruby-keys "inf-ruby")
 (add-hook 'ruby-mode-hook
-	  '(lambda ()
-	     (inf-ruby-keys)))
+      '(lambda ()
+         (inf-ruby-keys)))
 
 ;; rails
 (add-to-list 'load-path (concat plugins-path "emacs-rails"))
@@ -166,11 +167,11 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
-	     "~/.emacs.d/plugins/auto-complete/ac-dict")
+         "~/.emacs.d/plugins/auto-complete/ac-dict")
 (ac-config-default)
 (setq ac-modes
       (append ac-modes '(org-mode)
-	      '(ielm)))
+          '(ielm) '(haskell-mode) '(c++-mode)))
 
 ;; sr-speedbar
 (autoload 'sr-speedbar-toggle "sr-speedbar")
@@ -194,7 +195,7 @@
 (autoload 'gtags-mode "gtags")
 (setq c++-mode-hook
       '(lambda ()
-	 (gtags-mode 1)))
+     (gtags-mode 1)))
 (global-set-key (kbd "C-'") 'gtags-find-tags-from-here)
 (global-set-key (kbd "C-;") 'gtags-pop-stack)
 

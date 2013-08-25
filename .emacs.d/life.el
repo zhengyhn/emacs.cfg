@@ -133,9 +133,9 @@
       user-full-name  "yuanhang zheng"
       message-signature
       (concat
-       "郑远航(yuanhang zheng)\n"
+       "郑远航(Yuanhang Zheng)\n"
        "Email: zhengyhn@gmail.com\n"
-       "Blog: www.zhengyuanhang.com\n"))
+       "Blog: en.zhengyuanhang.com\n"))
 
      (setq mu4e-view-prefer-html t)
      (setq mu4e-attachment-dir "~/downloads")))  ;; A to view attachment

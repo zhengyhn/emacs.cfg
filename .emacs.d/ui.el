@@ -7,6 +7,9 @@
 
 ;;; code
 
+(custom-set-variables
+ '(mode-line-format (quote ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))))
+
 (setq frame-title-format "%F - %f")
 
 (setq inhibit-startup-screen t)    ;; don't show welcome buffer
@@ -14,11 +17,11 @@
 (menu-bar-mode -1)                 ;; disable toolbar,menubar and scrollbar
 (scroll-bar-mode -1)
 
-(fset 'yes-or-no-p 'y-or-n-p)      ;; y or n instead of yes or no
 (display-time)                     ;; display clock
 ;;(global-linum-mode t)              ;; show line and column number
 (setq column-number-mode t)
 
+(fset 'yes-or-no-p 'y-or-n-p)      ;; y or n instead of yes or no
 (setq x-select-enable-clipboard t) ;; share clipboard
 
 (global-hl-line-mode t)            ;; highlight the current line
@@ -26,9 +29,9 @@
 (global-font-lock-mode t)
 
 ;; theme
-;;(load-theme 'dichromacy t)         ;; select the theme
+(load-theme 'dichromacy t)         ;; select the theme
 ;;(load-theme 'adwaita t)
-(load-theme 'deeper-blue)
+;;(load-theme 'deeper-blue)
 ;;(load-theme 'light-blue)
 ;;(load-theme 'manoj-dark)
 ;;(load-theme 'misterioso)
