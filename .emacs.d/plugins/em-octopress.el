@@ -9,7 +9,7 @@
 ;; URL:
 
 (defconst octo-dir (expand-file-name "~/git/octopress"))
-(defconst octo-rake (expand-file-name "~/.gem/ruby/2.0.0/bin/bundle exec rake"))
+(defconst octo-rake (expand-file-name "~/.gem/ruby/1.9.1/bin/bundle exec rake"))
 (defconst octo-default-preview-url "http://localhost:4000")
 (setq password nil)
 
@@ -31,13 +31,13 @@ cd %s && %s %s'" octo-dir octo-rake what)))
   (interactive)
   
   (let* ((title (read-string "Please input the title: "))
-	 (command (format "new_post[\"%s\"]" title))
+         (command (format "new_post[\"%s\"]" title))
          (result (octo-do command))
          (regexp-str "Creating new post: ")
          (filename (concat octo-dir "/"
-			   (replace-regexp-in-string
-			    regexp-str ""
-			    (car (cdr (split-string result "\n")))))))
+                           (replace-regexp-in-string
+                            regexp-str ""
+                            (car (cdr (split-string result "\n")))))))
     "And Open the file"
       (find-file filename)))
 
@@ -61,11 +61,11 @@ cd %s && %s %s'" octo-dir octo-rake what)))
       (setq password (read-passwd "Please input the password: ")))
   (message "Committing the source")
   (shell-command (format (concat "bash -l -c "
-				 "'cd %s && "
-				 "git add -A && "
-				 "git commit -a -m \"update\" && "
-				 "echo \"%s\" | git push origin source'")
-			 octo-dir password))
+                                 "'cd %s && "
+                                 "git add -A && "
+                                 "git commit -a -m \"update\" && "
+                                 "echo \"%s\" | git push origin source'")
+                         octo-dir password))
   (message "Deployed"))
 
 (provide 'em-octopress)
