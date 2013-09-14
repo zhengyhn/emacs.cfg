@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: font's color
-# key: color
-# --
-@<font color="$1">
-$0
-@</font>
-

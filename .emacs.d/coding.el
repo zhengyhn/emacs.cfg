@@ -18,8 +18,15 @@
 ;; code style
 (require 'guess-offset)
 ;; (load-file (concat plugins-path "smart-tab.el"))
-(add-hook 'after-save-hook (lambda ()
-                             (untabify (point-min) (point-max))))
+(add-hook 'after-save-hook 'tab-to-space)
+
+(defun tab-to-space ()
+  "Replace tab with space except in makefile-gmake-mode"
+  (interactive)
+  (if (not (equal (buffer-local-value 'major-mode (current-buffer))
+                   'makefile-gmake-mode))
+         (untabify (point-min) (point-max))))
+  
 ;; asm
 ;; (autoload 'asm86-mode (concat plugins-path "asm86-mode.el"))
 ;; (setq auto-mode-alist
@@ -31,12 +38,13 @@
           auto-mode-alist))
 
 
-;; c/c++
-(eval-after-load 'cc-mode
-  '(progn
-     (setq c-default-style
-       '((cc-mode . "k&r")))
-     (setq c-basic-offset 4)))
+;; C/C++
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(defun my-c-mode-common-hook ()
+  (c-set-offset 'substatement-open 0)
+  (setq c-basic-offset 4)
+  (setq c-indent-level 4))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;;pascal
 ;;(load-file (concat plugins-path "pascal.el"))
@@ -130,6 +138,10 @@
 (autoload 'lua-mode "lua-mode")
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
+;; Coffee-script
+(autoload 'coffee-mode "coffee-mode")
+(add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
+
 ;; inf-ruby
 (autoload 'run-ruby "inf-ruby")
 (autoload 'inf-ruby-keys "inf-ruby")
@@ -171,7 +183,7 @@
 (ac-config-default)
 (setq ac-modes
       (append ac-modes '(org-mode)
-          '(ielm) '(haskell-mode) '(c++-mode)))
+          '(ielm) '(haskell-mode) '(c++-mode) '(markdown-mode)))
 
 ;; sr-speedbar
 (autoload 'sr-speedbar-toggle "sr-speedbar")
@@ -196,7 +208,7 @@
 (setq c++-mode-hook
       '(lambda ()
      (gtags-mode 1)))
-(global-set-key (kbd "C-'") 'gtags-find-tags-from-here)
+(global-set-key (kbd "C-'") 'gtags-find-tag-from-here)
 (global-set-key (kbd "C-;") 'gtags-pop-stack)
 
 ;; look for doc

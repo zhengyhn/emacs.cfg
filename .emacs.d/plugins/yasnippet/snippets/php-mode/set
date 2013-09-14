@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: setXXX()
-# key: set
-# --
-function set$1($2)
-{
-    $3
-}
-$0

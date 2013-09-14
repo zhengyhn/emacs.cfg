@@ -8,7 +8,7 @@
 ;; Updated: Mon Jul  1 20:53:55 2013
 ;; URL:
 
-(defconst octo-dir (expand-file-name "~/git/octopress"))
+(defconst octo-dir (expand-file-name "~/git/blog-en"))
 (defconst octo-rake (expand-file-name "~/.gem/ruby/1.9.1/bin/bundle exec rake"))
 (defconst octo-default-preview-url "http://localhost:4000")
 (setq password nil)
