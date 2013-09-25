@@ -18,7 +18,7 @@
 ;; code style
 (require 'guess-offset)
 ;; (load-file (concat plugins-path "smart-tab.el"))
-(add-hook 'after-save-hook 'tab-to-space)
+; (add-hook 'after-save-hook 'tab-to-space)
 
 (defun tab-to-space ()
   "Replace tab with space except in makefile-gmake-mode"
@@ -44,7 +44,7 @@
   (c-set-offset 'substatement-open 0)
   (setq c-basic-offset 4)
   (setq c-indent-level 4))
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;;pascal
 ;;(load-file (concat plugins-path "pascal.el"))
