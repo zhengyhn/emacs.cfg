@@ -1,0 +1,4 @@
+# name: template
+# key: tm
+# --
+template <typename T>

@@ -1,0 +1,7 @@
+# name: btcase
+# key: btcase
+# --
+BOOST_AUTO_TEST_CASE($1)
+{
+    $0
+}

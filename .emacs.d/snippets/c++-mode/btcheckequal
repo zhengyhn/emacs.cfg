@@ -1,0 +1,4 @@
+# name: btcheck_equal
+# key: btce
+# --
+BOOST_CHECK_EQUAL(
