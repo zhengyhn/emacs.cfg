@@ -1,4 +1,4 @@
 # name: btcheck
 # key: btc
 # --
-BOOST_CHECK
+BOOST_CHECK(

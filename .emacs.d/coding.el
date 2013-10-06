@@ -37,9 +37,9 @@
       (append '(("\\.asm\\'" . asm-mode) ("\\.inc\\'" . asm-mode))
           auto-mode-alist))
 
-
 ;; C/C++
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c++-mode))
 (defun my-c-mode-common-hook ()
   (c-set-offset 'substatement-open 0)
   (setq c-basic-offset 4)
@@ -50,7 +50,6 @@
 ;;(load-file (concat plugins-path "pascal.el"))
 ;;(require 'pascal)
 ;;(autoload 'pascal-mode "pascal" "Pascal Mode." t)
-
 
 ;; php-mode
 (autoload 'php-mode "php-mode")
@@ -183,7 +182,14 @@
 (ac-config-default)
 (setq ac-modes
       (append ac-modes '(org-mode)
-          '(ielm) '(haskell-mode) '(c++-mode) '(markdown-mode)))
+              '(ielm) '(haskell-mode) '(markdown-mode)))
+ 
+(add-to-list 'load-path (concat plugins-path "irony-mode/elisp"))
+(require 'irony)
+
+(irony-enable 'ac)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
 
 ;; sr-speedbar
 (autoload 'sr-speedbar-toggle "sr-speedbar")
@@ -205,16 +211,16 @@
 
 ;; gtags
 (autoload 'gtags-mode "gtags")
-(setq c++-mode-hook
-      '(lambda ()
-     (gtags-mode 1)))
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (gtags-mode 1)))
 (global-set-key (kbd "C-'") 'gtags-find-tag-from-here)
 (global-set-key (kbd "C-;") 'gtags-pop-stack)
 
-;; look for doc
+;; look for man page
 (global-set-key (kbd "C-x w") 'woman)
 
-;; all operation function
+;; all operation functions
 (autoload 'insert-empty-line "operation")
 (global-set-key [(shift return)] 'insert-empty-line)
 
