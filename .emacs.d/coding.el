@@ -174,6 +174,11 @@
 (global-set-key [f9] 'smart-compile)
 (global-set-key [f10] 'gdb)
 
+;; yaSnippet
+(add-to-list 'load-path (concat plugins-path "yasnippet"))
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-complete")
 (require 'auto-complete-config)
@@ -186,28 +191,20 @@
  
 (add-to-list 'load-path (concat plugins-path "irony-mode/elisp"))
 (require 'irony)
-
 (irony-enable 'ac)
-(add-hook 'c++-mode-hook 'irony-mode)
+
+(defun my-c++-hooks ()
+  (yas/minor-mode-on)
+  (auto-complete-mode 1)
+  (setq ac-sources (delq 'ac-source-yasnippet ac-sources))
+  (irony-mode 1))
+(add-hook 'c++-mode-hook 'my-c++-hooks)
+;(add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 
 ;; sr-speedbar
 (autoload 'sr-speedbar-toggle "sr-speedbar")
 (global-set-key (kbd "C-c b") 'sr-speedbar-toggle)
-
-;; yaSnippet
-(add-to-list 'load-path (concat plugins-path "yasnippet"))
-(require 'yasnippet)
-(yas-global-mode 1)
-;; key
-;;=====text
-;;email
-;;user
-;;=====c-mode
-;;once:#ifndef
-;;main
-;;inc:#include
-;;p:printf
 
 ;; gtags
 (autoload 'gtags-mode "gtags")
