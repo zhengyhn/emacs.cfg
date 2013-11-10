@@ -32,7 +32,6 @@
 ;; (setq auto-mode-alist
 ;;       (append '(("\\.asm\\'" . asm86-mode) ("\\.inc\\'" . asm86-mode))
 ;;        auto-mode-alist))
-
 (setq auto-mode-alist
       (append '(("\\.asm\\'" . asm-mode) ("\\.inc\\'" . asm-mode))
           auto-mode-alist))
@@ -104,9 +103,8 @@
 ;; (define-key eclim-mode-map (kbd "C-c C-e f s") 'eclim-java-format)
 ;; (define-key eclim-mode-map (kbd "C-c C-e g") 'eclim-java-generate-getter-and-setter)
 
-
 ;; java-mode
-(eval-after-load 'cc-mode
+(eval-after-load 'java-mode
   '(progn
      (defun java-mode-defaults ()
        (setq c-basic-offset 4))
@@ -122,7 +120,6 @@
      (add-to-list 'flymake-allowed-file-name-masks
           '("\\.java$" my-flymake-init flymake-simple-cleanup))))
 
-
 ;; haskell
 (add-to-list 'load-path (concat plugins-path "haskell-mode"))
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
@@ -134,8 +131,8 @@
      (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)))
 
 ;; lua
-(autoload 'lua-mode "lua-mode")
-(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+; (autoload 'lua-mode "lua-mode")
+; (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
 ;; Coffee-script
 (autoload 'coffee-mode "coffee-mode")
@@ -161,8 +158,6 @@
 (autoload 'yaml-mode "yaml-mode")
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
-;; rst
-
 ;; markdown
 (autoload 'markdown-mode "markdown-mode")
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
@@ -187,19 +182,18 @@
 (ac-config-default)
 (setq ac-modes
       (append ac-modes '(org-mode)
-              '(ielm) '(haskell-mode) '(markdown-mode)))
+              '(ielm) '(haskell-mode) '(markdown-mode) '(asm-mode)))
  
 (add-to-list 'load-path (concat plugins-path "irony-mode/elisp"))
-(require 'irony)
-(irony-enable 'ac)
 
 (defun my-c++-hooks ()
   (yas/minor-mode-on)
   (auto-complete-mode 1)
   (setq ac-sources (delq 'ac-source-yasnippet ac-sources))
+  (require 'irony)
+  (irony-enable 'ac)
   (irony-mode 1))
 (add-hook 'c++-mode-hook 'my-c++-hooks)
-;(add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 
 ;; sr-speedbar
